@@ -5,7 +5,6 @@
 [![using](https://img.shields.io/badge/frontend-react-blue)](https://img.shields.io/badge/frontend-react-blue) 
 [![using](https://img.shields.io/badge/frontend-typescript-blue)](https://img.shields.io/badge/frontend-typescript-blue) 
 [![using](https://img.shields.io/badge/backend-spring--boot-blue)](https://img.shields.io/badge/backend-spring--boot-blue) 
-[![using](https://img.shields.io/badge/db-neo4j-blue)](https://img.shields.io/badge/db-neo4j-blue) 
         
 #   RUTT        
 todo    
