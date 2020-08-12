@@ -1,0 +1,41 @@
+@startuml
+
+class Requirement {
+    title: string
+    text: string
+
+    usecases: Usecase[]
+    tasks: Task[]
+    children: Requirement[]
+    parent: Requirement | null
+}
+
+class Usecase {
+    title: string
+
+    requirements: Requirement[]
+    tasks: Task[]
+    steps: Step[]
+}
+
+class Step {
+    action: string
+}
+
+class Task {
+    title: string
+    text: string
+
+    requirements: Requirement[]
+    usecases: Usecase[]
+}
+
+Requirement -- Usecase : N:N
+Requirement -- Task : N:N
+Requirement --> Requirement : 1:N
+Usecase - Task : N:N
+Usecase -- Step : N:N
+
+hide methods
+
+@enduml
