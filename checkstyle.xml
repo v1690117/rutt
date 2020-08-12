@@ -35,14 +35,14 @@
         <!--        &lt;!&ndash; Checks for Javadoc comments.                     &ndash;&gt;-->
         <!--        &lt;!&ndash; See https://checkstyle.org/config_javadoc.html &ndash;&gt;-->
         <module name="InvalidJavadocPosition"/>
-        <module name="MissingJavadocType"/>
-        <module name="MissingJavadocMethod">
-            <property name="allowMissingPropertyJavadoc" value="true"/>
-        </module>
-        <module name="JavadocMethod">
-            <property name="scope" value="public"/>
-            <property name="tokens" value="METHOD_DEF,ANNOTATION_FIELD_DEF"/>
-        </module>
+<!--        <module name="MissingJavadocType"/>-->
+<!--        <module name="MissingJavadocMethod">-->
+<!--            <property name="allowMissingPropertyJavadoc" value="true"/>-->
+<!--        </module>-->
+<!--        <module name="JavadocMethod">-->
+<!--            <property name="scope" value="public"/>-->
+<!--            <property name="tokens" value="METHOD_DEF,ANNOTATION_FIELD_DEF"/>-->
+<!--        </module>-->
 
         <!--        &lt;!&ndash; Checks for Naming Conventions.                  &ndash;&gt;-->
         <!--        &lt;!&ndash; See https://checkstyle.org/config_naming.html &ndash;&gt;-->
