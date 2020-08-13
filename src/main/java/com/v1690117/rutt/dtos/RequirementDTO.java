@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 public class RequirementDTO {
     private Long id;
+    private SpecificationDTO specification;
     private String text;
     private List<TaskDTO> tasks;
 
@@ -18,13 +19,13 @@ public class RequirementDTO {
         RequirementDTO dto = new RequirementDTO();
         dto.id = requirement.getId();
         dto.text = requirement.getText();
+        dto.text = requirement.getText();
+        dto.specification = SpecificationDTO.fromSpecification(requirement.getSpecification());
         return dto;
     }
 
     public static RequirementDTO fromRequirementFull(Requirement requirement) {
-        RequirementDTO dto = new RequirementDTO();
-        dto.id = requirement.getId();
-        dto.text = requirement.getText();
+        RequirementDTO dto = fromRequirement(requirement);
         dto.tasks = requirement.getTasks().stream()
                 .map(TaskDTO::fromTask)
                 .collect(Collectors.toList());

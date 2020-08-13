@@ -1,26 +1,36 @@
+DROP TABLE IF EXISTS tasks_usecases;
+DROP TABLE IF EXISTS requirements_usecases;
+DROP TABLE IF EXISTS requirements_tasks;
 DROP TABLE IF EXISTS requirements;
+DROP TABLE IF EXISTS tasks;
+DROP TABLE IF EXISTS usecases;
+DROP TABLE IF EXISTS specifications;
+
+CREATE TABLE specifications
+(
+    id   BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL
+);
 CREATE TABLE requirements
 (
     id   BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    text VARCHAR(255)
+    text VARCHAR(255),
+    specification_id BIGINT NOT NULL,
+    CONSTRAINT requirements_specification_id_fk
+        FOREIGN KEY (specification_id)
+            REFERENCES specifications (id)
 );
-
-DROP TABLE IF EXISTS tasks;
 CREATE TABLE tasks
 (
     id          BIGINT       NOT NULL AUTO_INCREMENT PRIMARY KEY,
     title       VARCHAR(100) NOT NULL,
     description VARCHAR(255)
 );
-
-DROP TABLE IF EXISTS usecases;
 CREATE TABLE usecases
 (
     id          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     description VARCHAR(2555)
 );
-
-DROP TABLE IF EXISTS requirements_tasks;
 CREATE TABLE requirements_tasks
 (
     id             BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -33,8 +43,6 @@ CREATE TABLE requirements_tasks
         FOREIGN KEY (task_id)
             REFERENCES tasks (id)
 );
-
-DROP TABLE IF EXISTS requirements_usecases;
 CREATE TABLE requirements_usecases
 (
     id             BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -47,9 +55,6 @@ CREATE TABLE requirements_usecases
         FOREIGN KEY (usecase_id)
             REFERENCES usecases (id)
 );
-
-
-DROP TABLE IF EXISTS tasks_usecases;
 CREATE TABLE tasks_usecases
 (
     id             BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
