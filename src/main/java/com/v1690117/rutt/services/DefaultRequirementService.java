@@ -36,6 +36,7 @@ public class DefaultRequirementService implements RequirementService {
                 repository.save(
                         new Requirement(
                                 null,
+                                null, // todo
                                 requirement.getText(),
                                 Collections.emptyList()
                         )
@@ -49,6 +50,7 @@ public class DefaultRequirementService implements RequirementService {
                 repository.save(
                         new Requirement(
                                 requirement.getId(),
+                                null, // todo
                                 requirement.getText(),
                                 Collections.emptyList()
                         )

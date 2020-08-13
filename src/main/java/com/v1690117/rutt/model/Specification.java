@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,35 +16,25 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.List;
 
 @Data
 @Entity
-@Table(name = "requirements")
+@Table(name = "specifications")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Requirement {
+public class Specification {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "specification_id")
-    private Specification specification;
+    @Column(name = "title")
+    private String title;
 
-    @Column(name = "text")
-    private String text;
-
-    @ManyToMany(fetch = FetchType.LAZY)
     @Fetch(FetchMode.SUBSELECT)
-    @JoinTable(
-            name = "requirements_tasks",
-            joinColumns = {@JoinColumn(name = "requirement_id")},
-            inverseJoinColumns = {@JoinColumn(name = "task_id")}
-    )
-
-    private List<Task> tasks;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "specification")
+    private List<Requirement> requirements;
 }

@@ -1,5 +1,10 @@
 @startuml
 
+class Specification {
+    title: string
+    requirements: Requirement[]
+}
+
 class Requirement {
     title: string
     text: string
@@ -30,6 +35,7 @@ class Task {
     usecases: Usecase[]
 }
 
+Specification -- Requirement : 1:N
 Requirement -- Usecase : N:N
 Requirement -- Task : N:N
 Requirement --> Requirement : 1:N
