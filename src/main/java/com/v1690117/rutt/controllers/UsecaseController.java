@@ -14,12 +14,12 @@ import java.util.List;
 public class UsecaseController {
     private final UsecaseRepository repository; // todo change by service
 
-    @GetMapping(value = "/usecases")
+    @GetMapping(value = "/api/usecases")
     public List<Usecase> getAll() {
         return repository.findAll();
     }
 
-    @GetMapping(value = "/usecases/{id}")
+    @GetMapping(value = "/api/usecases/{id}")
     public Usecase getById(@PathVariable("id") long id) {
         return repository.findById(id).get();
     }

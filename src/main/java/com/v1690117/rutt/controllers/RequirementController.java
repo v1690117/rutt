@@ -14,12 +14,12 @@ import java.util.List;
 public class RequirementController {
     private final RequirementService service; // todo change by service
 
-    @GetMapping(value = "/requirements")
+    @GetMapping(value = "/api/requirements")
     public List<RequirementDTO> getAll() {
         return service.findAll();
     }
 
-    @GetMapping(value = "/requirements/{id}")
+    @GetMapping(value = "/api/requirements/{id}")
     public RequirementDTO getById(@PathVariable("id") long id) {
         return service.findById(id);
     }

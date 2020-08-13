@@ -14,12 +14,12 @@ import java.util.List;
 public class TaskController {
     private final TaskService service; // todo change by service
 
-    @GetMapping(value = "/tasks")
+    @GetMapping(value = "/api/tasks")
     public List<TaskDTO> getAll() {
         return service.findAll();
     }
 
-    @GetMapping(value = "/tasks/{id}")
+    @GetMapping(value = "/api/tasks/{id}")
     public TaskDTO getById(@PathVariable("id") long id) {
         return service.findById(id);
     }

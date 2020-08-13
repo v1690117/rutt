@@ -14,12 +14,12 @@ import java.util.List;
 public class SpecificationController {
     private final SpecificationService service; // todo change by service
 
-    @GetMapping(value = "/specifications")
+    @GetMapping(value = "/api/specifications")
     public List<SpecificationDTO> getAll() {
         return service.findAll();
     }
 
-    @GetMapping(value = "/specifications/{id}")
+    @GetMapping(value = "/api/specifications/{id}")
     public SpecificationDTO getById(@PathVariable("id") long id) {
         return service.findById(id);
     }

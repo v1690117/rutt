@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import App from "./components/App.tsx";
 
-const App: React.FC = () => <div>Hello, World!</div>
 
 ReactDOM.render(
     <App/>,
