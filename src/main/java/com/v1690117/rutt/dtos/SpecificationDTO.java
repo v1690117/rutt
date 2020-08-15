@@ -16,8 +16,8 @@ public class SpecificationDTO {
 
     public static SpecificationDTO fromSpecification(Specification specification) {
         SpecificationDTO dto = new SpecificationDTO();
-        dto.id= specification.getId();
-        dto.title=specification.getTitle();
+        dto.id = specification.getId();
+        dto.title = specification.getTitle();
         return dto;
     }
 
