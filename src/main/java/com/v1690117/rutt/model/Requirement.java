@@ -44,6 +44,8 @@ public class Requirement {
             joinColumns = {@JoinColumn(name = "requirement_id")},
             inverseJoinColumns = {@JoinColumn(name = "task_id")}
     )
-
     private List<Task> tasks;
+
+    @Column(name = "parent_id")
+    private Long parentId;
 }
