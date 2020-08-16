@@ -31,7 +31,7 @@ public class SpecificationDTO {
         for (Requirement requirement : specification.getRequirements()) {
             RequirementDTO requirementDTO = RequirementDTO.fromRequirement(requirement);
             requirements.add(requirementDTO);
-            dict.put(requirementDTO.getId(), requirementDTO)
+            dict.put(requirementDTO.getId(), requirementDTO);
         }
         dto.requirements = new LinkedList<>();
         requirements.forEach(requirementDTO -> {
