@@ -13,12 +13,16 @@ CREATE TABLE specifications
 );
 CREATE TABLE requirements
 (
-    id   BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    text VARCHAR(255),
+    id               BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    text             VARCHAR(255),
     specification_id BIGINT NOT NULL,
+    parent_id        BIGINT,
     CONSTRAINT requirements_specification_id_fk
         FOREIGN KEY (specification_id)
-            REFERENCES specifications (id)
+            REFERENCES specifications (id),
+    CONSTRAINT requirements_parent_id_fk
+        FOREIGN KEY (parent_id)
+            REFERENCES requirements (id)
 );
 CREATE TABLE tasks
 (

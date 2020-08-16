@@ -4,6 +4,7 @@ import com.v1690117.rutt.model.Requirement;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,6 +15,8 @@ public class RequirementDTO {
     private SpecificationDTO specification;
     private String text;
     private List<TaskDTO> tasks;
+    private Long parentId;
+    private List<RequirementDTO> children;
 
     public static RequirementDTO fromRequirement(Requirement requirement) {
         RequirementDTO dto = new RequirementDTO();
@@ -21,6 +24,8 @@ public class RequirementDTO {
         dto.text = requirement.getText();
         dto.text = requirement.getText();
         dto.specification = SpecificationDTO.fromSpecification(requirement.getSpecification());
+        dto.parentId = requirement.getParentId();
+        dto.children = new LinkedList<>();
         return dto;
     }
 

@@ -38,7 +38,8 @@ public class DefaultRequirementService implements RequirementService {
                                 null,
                                 null, // todo
                                 requirement.getText(),
-                                Collections.emptyList()
+                                Collections.emptyList(),
+                                requirement.getParentId()
                         )
                 )
         );
@@ -52,7 +53,8 @@ public class DefaultRequirementService implements RequirementService {
                                 requirement.getId(),
                                 null, // todo
                                 requirement.getText(),
-                                Collections.emptyList()
+                                Collections.emptyList(),
+                                requirement.getParentId()
                         )
                 )
         );
