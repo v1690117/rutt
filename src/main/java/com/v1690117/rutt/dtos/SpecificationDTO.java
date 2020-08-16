@@ -1,5 +1,6 @@
 package com.v1690117.rutt.dtos;
 
+import com.v1690117.rutt.model.Requirement;
 import com.v1690117.rutt.model.Specification;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,7 +9,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Data
 @NoArgsConstructor
@@ -27,12 +27,13 @@ public class SpecificationDTO {
     public static SpecificationDTO fromRequirementFull(Specification specification) {
         SpecificationDTO dto = fromSpecification(specification);
         Map<Long, RequirementDTO> dict = new HashMap<>();
-        List<RequirementDTO> requirements = specification.getRequirements().stream()
-                .map(RequirementDTO::fromRequirement)
-                .collect(Collectors.toList());
-        requirements.forEach(requirementDTO -> dict.put(requirementDTO.getId(), requirementDTO));
+        List<RequirementDTO> requirements = new LinkedList<>();
+        for (Requirement requirement : specification.getRequirements()) {
+            RequirementDTO requirementDTO = RequirementDTO.fromRequirement(requirement);
+            requirements.add(requirementDTO);
+            dict.put(requirementDTO.getId(), requirementDTO)
+        }
         dto.requirements = new LinkedList<>();
-
         requirements.forEach(requirementDTO -> {
             if (requirementDTO.getParentId() == null) {
                 dto.requirements.add(requirementDTO);
