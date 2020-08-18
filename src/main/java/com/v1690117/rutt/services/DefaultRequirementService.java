@@ -2,7 +2,9 @@ package com.v1690117.rutt.services;
 
 import com.v1690117.rutt.dtos.RequirementDTO;
 import com.v1690117.rutt.model.Requirement;
+import com.v1690117.rutt.model.Task;
 import com.v1690117.rutt.repositories.RequirementRepository;
+import com.v1690117.rutt.repositories.TaskRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,11 +16,12 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class DefaultRequirementService implements RequirementService {
-    private final RequirementRepository repository;
+    private final RequirementRepository requirementRepository;
+    private final TaskRepository taskRepository;
 
     @Override
     public List<RequirementDTO> findAll() {
-        return repository.findAll().stream()
+        return requirementRepository.findAll().stream()
                 .map(RequirementDTO::fromRequirement)
                 .collect(Collectors.toList());
     }
@@ -27,13 +30,13 @@ public class DefaultRequirementService implements RequirementService {
     @Transactional(readOnly = true)
     public RequirementDTO findById(long id) {
         // todo get relations
-        return RequirementDTO.fromRequirementFull(repository.findById(id).get());
+        return RequirementDTO.fromRequirementFull(requirementRepository.findById(id).get());
     }
 
     @Override
     public RequirementDTO insert(RequirementDTO requirement) {
         return RequirementDTO.fromRequirement(
-                repository.save(
+                requirementRepository.save(
                         new Requirement(
                                 null,
                                 null, // todo
@@ -48,7 +51,7 @@ public class DefaultRequirementService implements RequirementService {
     @Override
     public RequirementDTO update(RequirementDTO requirement) {
         return RequirementDTO.fromRequirement(
-                repository.save(
+                requirementRepository.save(
                         new Requirement(
                                 requirement.getId(),
                                 null, // todo
@@ -62,8 +65,17 @@ public class DefaultRequirementService implements RequirementService {
 
     @Override
     public void delete(long id) {
-        repository.delete(
-                repository.findById(id).get()
+        requirementRepository.delete(
+                requirementRepository.findById(id).get()
         );
+    }
+
+    @Override
+    public RequirementDTO addTask(long requirementId, long taskId) {
+        Requirement requirement = requirementRepository.findById(requirementId).get();
+        Task task = taskRepository.findById(taskId).get();
+        requirement.getTasks().add(task);
+        requirementRepository.save(requirement);
+        return findById(requirementId);
     }
 }

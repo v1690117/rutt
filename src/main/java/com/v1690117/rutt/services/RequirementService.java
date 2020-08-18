@@ -14,5 +14,7 @@ public interface RequirementService {
     RequirementDTO update(RequirementDTO requirement);
 
     void delete(long id);
+
+    RequirementDTO addTask(long requirementId, long taskId);
 }
 
