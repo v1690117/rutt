@@ -9,6 +9,8 @@ export interface IRequirement {
     specification: ISpecification;
     text: string;
     tasks: ITask[];
+    parentId: number;
+    children: IRequirement[];
 }
 
 export interface ITask {

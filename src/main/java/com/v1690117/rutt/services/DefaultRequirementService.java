@@ -22,7 +22,7 @@ public class DefaultRequirementService implements RequirementService {
     @Override
     public List<RequirementDTO> findAll() {
         return requirementRepository.findAll().stream()
-                .map(RequirementDTO::fromRequirement)
+                .map(RequirementDTO::fromRequirementFull)
                 .collect(Collectors.toList());
     }
 

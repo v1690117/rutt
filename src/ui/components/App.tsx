@@ -4,20 +4,28 @@ import {Task} from "./Task.tsx";
 import {Specification} from "./Specification.tsx";
 import {Tasks} from "./Tasks.tsx";
 import {Specifications} from "./Specifications.tsx";
+import {Paper, Tab, Tabs} from "@material-ui/core";
 
 const App: React.FC = () => {
+    const [tab, setTab] = React.useState(0);
+    const changeTab = (event: React.ChangeEvent<{}>, newValue: number) => {
+        setTab(newValue);
+    };
     return (
         <Router>
-            <nav>
-                <ul>
-                    <li>
-                        <Link to="/specifications">Specifications</Link>
-                    </li>
-                    <li>
-                        <Link to="/tasks">Tasks</Link>
-                    </li>
-                </ul>
-            </nav>
+            <Paper square>
+                <Tabs
+                    value={tab}
+                    indicatorColor="primary"
+                    textColor="primary"
+                    onChange={changeTab}
+                    aria-label="disabled tabs example"
+                >
+                    <Tab label="Requirement specifications" component={Link} to={"/specifications"}/>
+                    <Tab label="Tasks" component={Link} to={"/tasks"}/>
+                    <Tab label="Usecases" component={Link} to={"/usecases"} disabled/>
+                </Tabs>
+            </Paper>
             <div>
                 <Switch>
                     <Route path="/specifications/:id"
@@ -32,9 +40,13 @@ const App: React.FC = () => {
                     <Route path="/tasks">
                         <Tasks/>
                     </Route>
+                    {/*<Route path="/">*/}
+                    {/*    <h1>RUTT</h1>*/}
+                    {/*</Route>*/}
                 </Switch>
             </div>
-        </Router>);
+        </Router>
+    );
 }
 
 export default App;

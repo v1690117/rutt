@@ -35,14 +35,16 @@ public class SpecificationDTO {
             requirements.add(requirementDTO);
             dict.put(requirementDTO.getId(), requirementDTO);
         }
-        dto.requirements = new LinkedList<>();
-        requirements.forEach(requirementDTO -> {
-            if (requirementDTO.getParentId() == null) {
-                dto.requirements.add(requirementDTO);
-            } else {
-                dict.get(requirementDTO.getParentId()).getChildren().add(requirementDTO);
-            }
-        });
+//        dto.requirements = new LinkedList<>();
+//        requirements.forEach(requirementDTO -> {
+//            if (requirementDTO.getParentId() == null) {
+//                dto.requirements.add(requirementDTO);
+//            } else {
+//                dict.get(requirementDTO.getParentId()).getChildren().add(requirementDTO);
+//            }
+//        });
+        dto.requirements = specification.getRequirements().stream().map(RequirementDTO::fromRequirementFull)
+                .collect(Collectors.toList());
         return dto;
     }
 
