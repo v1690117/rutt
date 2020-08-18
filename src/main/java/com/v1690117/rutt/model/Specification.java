@@ -34,4 +34,8 @@ public class Specification {
     @Fetch(FetchMode.SUBSELECT)
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "specification")
     private List<Requirement> requirements;
+
+    public Specification(Long id) {
+        this.id = id;
+    }
 }

@@ -48,4 +48,8 @@ public class Requirement {
 
     @Column(name = "parent_id")
     private Long parentId;
+
+    public Requirement(Long id) {
+        this.id = id;
+    }
 }
