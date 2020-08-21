@@ -5,6 +5,8 @@ import com.v1690117.rutt.services.TaskService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -17,6 +19,11 @@ public class TaskController {
     @GetMapping(value = "/api/tasks")
     public List<TaskDTO> getAll() {
         return service.findAll();
+    }
+
+    @PostMapping(value = "/api/tasks")
+    public TaskDTO create(@RequestBody TaskDTO taskDTO) {
+        return service.insert(taskDTO);
     }
 
     @GetMapping(value = "/api/tasks/{id}")

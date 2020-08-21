@@ -2,56 +2,10 @@ import * as React from "react";
 import {useCallback, useEffect, useState} from "react";
 import {ISpecification} from "../interfaces/model";
 import {Link} from "react-router-dom";
-import {Button, ButtonGroup, Drawer, TextField} from "@material-ui/core";
+import {Drawer} from "@material-ui/core";
 import AddIcon from '@material-ui/icons/Add';
 import Table from "./Table.tsx";
-
-interface ICreationFormProps {
-    onClose: () => void;
-    onCreate: () => void;
-}
-
-const CreationForm: any = (props: ICreationFormProps) => {
-    const [title, setTitle] = useState<string>("");
-    const create = () => {
-        fetch('/api/specifications', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({title})
-        }).then(props.onCreate).catch(alert);
-    };
-    return (
-        <>
-            <div>
-                <TextField id="title" label="Title" value={title}
-                           defaultValue={" "}
-                           onChange={(event: React.ChangeEvent<HTMLInputElement>) => setTitle(event.target.value)}
-                />
-            </div>
-            <ButtonGroup aria-label="outlined primary button group">
-                <Button
-                    variant="contained"
-                    color="secondary"
-                    onClick={props.onClose}
-                    size="small"
-                >
-                    Close
-                </Button>
-                <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={create}
-                    size="small"
-                >
-                    Create
-                </Button>
-            </ButtonGroup>
-        </>
-    );
-}
-
+import CreateSpecificationForm from "./CreateSpecificationForm.tsx";
 
 export const Specifications: React.FC = () => {
     const [specifications, setSpecifications] = useState<ISpecification[]>([]);
@@ -95,7 +49,7 @@ export const Specifications: React.FC = () => {
                 ]}
             />
             <Drawer anchor={'right'} open={creationFormActive} onClose={closeFormHandler}>
-                <CreationForm onClose={closeFormHandler} onCreate={creationHandler}/>
+                <CreateSpecificationForm onClose={closeFormHandler} onCreate={creationHandler}/>
             </Drawer>
         </>
     );

@@ -12,7 +12,7 @@ export const Task = (props: ITaskProps) => {
         fetch(`/api/tasks/${props.id}`)
             .then(r => r.json())
             .then(setTask);
-    }, []);
+    }, [props.id]);
     return (<div>
         {
             task && <div><h1>{`${task.id}. ${task.title}`}</h1>

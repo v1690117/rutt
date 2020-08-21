@@ -4,6 +4,7 @@ import {Task} from "./Task.tsx";
 import {Specification} from './Specification.tsx';
 import {Tasks} from './Tasks.tsx';
 import {Specifications} from './Specifications.tsx';
+import {Requirement} from "./Requirement.tsx";
 import {Paper, Tab, Tabs} from "@material-ui/core";
 import './../styles/index.css'
 
@@ -40,6 +41,9 @@ const App: React.FC = () => {
                     </Route>
                     <Route path="/tasks/:id"
                            render={({match}) => <Task id={match.params.id}/>}
+                    />
+                    <Route path="/requirements/:id"
+                           render={({match}) => <Requirement id={match.params.id}/>}
                     />
                     <Route path="/tasks">
                         <Tasks/>
