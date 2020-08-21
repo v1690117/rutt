@@ -45,6 +45,12 @@ export const Requirement = (props: IRequirementProps) => {
     const openTaskCreationForm = () => {
         setTaskCreationFormActive(true);
     }
+    const deleteChild = (childId: number) => {
+        fetch(`/api/requirements/${childId}`,
+            {method: "DELETE"}
+        ).catch(alert)
+            .finally(fetchRequirement);
+    }
     return (<div>
         {
             requirement && (<div>
@@ -60,6 +66,11 @@ export const Requirement = (props: IRequirementProps) => {
                             <li key={child.id}>
                                 <Link to={`/requirements/${child.id}`}>#{child.id}</Link>
                                 {child.text}
+                                <Button variant="contained"
+                                        color="secondary"
+                                        onClick={() => deleteChild(child.id)}
+                                        size="small"
+                                >x</Button>
                             </li>
                         )}
                     </ul>

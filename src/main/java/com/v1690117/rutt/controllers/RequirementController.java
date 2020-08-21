@@ -4,6 +4,7 @@ import com.v1690117.rutt.dtos.RequirementDTO;
 import com.v1690117.rutt.dtos.TaskDTO;
 import com.v1690117.rutt.services.RequirementService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,6 +46,11 @@ public class RequirementController {
     @GetMapping(value = "/api/requirements/{id}/children")
     public List<RequirementDTO> getRequirementChildren(@PathVariable("id") long id) {
         return service.findById(id).getChildren();
+    }
+
+    @DeleteMapping(value = "/api/requirements/{id}")
+    public void delete(@PathVariable("id") long id) {
+        service.delete(id);
     }
 }
 
