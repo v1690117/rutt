@@ -1,43 +1,10 @@
 import * as React from "react";
-import {useEffect, useState} from "react";
-import {ISpecification, ITask} from "../interfaces/model";
-import MaterialTable from "material-table";
+import {useCallback, useEffect, useState} from "react";
+import {IRequirement, ISpecification, ITask} from "../interfaces/model";
+import {Button, ButtonGroup, Drawer, TextField} from "@material-ui/core";
+import AddIcon from "@material-ui/icons/Add";
+import Table from "./Table.tsx";
 
-import AddBox from '@material-ui/icons/AddBox';
-import Check from '@material-ui/icons/Check';
-import ChevronLeft from '@material-ui/icons/ChevronLeft';
-import ChevronRight from '@material-ui/icons/ChevronRight';
-import Clear from '@material-ui/icons/Clear';
-import DeleteOutline from '@material-ui/icons/DeleteOutline';
-import Edit from '@material-ui/icons/Edit';
-import FilterList from '@material-ui/icons/FilterList';
-import FirstPage from '@material-ui/icons/FirstPage';
-import LastPage from '@material-ui/icons/LastPage';
-import Remove from '@material-ui/icons/Remove';
-import SaveAlt from '@material-ui/icons/SaveAlt';
-import Search from '@material-ui/icons/Search';
-import ViewColumn from '@material-ui/icons/ViewColumn';
-import {ArrowUpward} from "@material-ui/icons";
-
-export const tableIcons = {
-    Add: () => <AddBox/>,
-    Check: () => <Check/>,
-    Clear: () => <Clear/>,
-    Delete: () => <DeleteOutline/>,
-    DetailPanel: () => <ChevronRight/>,
-    Edit: () => <Edit/>,
-    Export: () => <SaveAlt/>,
-    Filter: () => <FilterList/>,
-    FirstPage: () => <FirstPage/>,
-    LastPage: () => <LastPage/>,
-    NextPage: () => <ChevronRight/>,
-    PreviousPage: () => <ChevronLeft/>,
-    ResetSearch: () => <Clear/>,
-    Search: () => <Search/>,
-    SortArrow: () => <ArrowUpward/>,
-    ThirdStateCheck: () => <Remove/>,
-    ViewColumn: () => <ViewColumn/>
-};
 
 interface ISpecProps {
     id: number;
@@ -47,42 +14,132 @@ const Task = (props: { task: ITask }) => <div>
     <a href={`#/tasks/${props.task.id}`}>#{props.task.id}</a> {props.task.title}
 </div>
 
+
+interface ICreationFormProps {
+    onClose: () => void;
+    onCreate: () => void;
+    specification: ISpecification;
+    selections: number[];
+}
+
+const CreationForm: any = (props: ICreationFormProps) => {
+    const [text, setText] = useState<string>("");
+    const onCreateHandler = () => {
+        const parentId = props.selections && props.selections.length === 1 ? props.selections[0] : undefined;
+        debugger;
+        fetch('/api/requirements', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                text,
+                specification: {
+                    id: props.specification.id
+                },
+                parentId
+            })
+        }).then(props.onCreate).catch(alert);
+    };
+    return (
+        <>
+            <div>
+                <TextField id="text" label="Text" value={text}
+                           defaultValue={" "}
+                           onChange={(event: React.ChangeEvent<HTMLInputElement>) => setText(event.target.value)}
+                />
+            </div>
+            <ButtonGroup aria-label="outlined primary button group">
+                <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={props.onClose}
+                    size="small"
+                >
+                    Close
+                </Button>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={onCreateHandler}
+                    size="small"
+                >
+                    Create
+                </Button>
+            </ButtonGroup>
+        </>
+    );
+}
+
 export const Specification = (props: ISpecProps) => {
     const [specification, setSpecification] = useState<ISpecification | null>();
-    useEffect(() => {
+    const [creationFormActive, setCreationFormActive] = useState<boolean>(false);
+    const [selectedRequirements, setSelectedRequirements] = useState<number[]>([]);
+    const fetchSpecification = () => {
         fetch(`/api/specifications/${props.id}`)
             .then(r => r.json())
             .then(setSpecification);
+    }
+    useEffect(() => {
+        fetchSpecification();
     }, []);
-    return (<div>
+    const closeFormHandler = useCallback(() => {
+        setCreationFormActive(false);
+    }, []);
+    const creationHandler = useCallback(() => {
+        fetchSpecification();
+        setCreationFormActive(false);
+    }, []);
+    return (<>
         {
-            specification && <div><h1>{`${specification.id}. ${specification.title}`}</h1>
-                <div style={{maxWidth: "100%"}}>
-                    <MaterialTable
-                        columns={[
-                            {title: "ID", field: "id"},
-                            {title: "Requirement", field: "text"},
-                            {
-                                title: "Tasks",
-                                render: (rowData) => {
-                                    return <div>
-                                        <ul>
-                                            {rowData.tasks.map(t => <li><Task task={t}/></li>)}
-                                        </ul>
-                                    </div>
-                                }
-                            }
-                        ]}
-                        data={specification.requirements}
-                        title="Demo Title"
-                        icons={tableIcons as any}
-                        parentChildData={(row, rows) => rows.find(a => a.id === row.parentId)}
-                        options={
-                            {pageSize: 20, maxBodyHeight: 400, exportButton: true, exportAllData: true, sorting: false}
+            specification &&
+            <Table
+                columns={[
+                    {title: "ID", field: "id"},
+                    {title: "Requirement", field: "text"},
+                    {
+                        title: "Tasks",
+                        render: (rowData) => {
+                            return <div>
+                                <ul>
+                                    {rowData.tasks.map((t: ITask) => <li><Task task={t}/></li>)}
+                                </ul>
+                            </div>
                         }
-                    />
-                </div>
-            </div>
+                    }
+                ]}
+                data={specification.requirements}
+                title={specification.title}
+                parentChildData={(row: any, rows: any[]) => rows.find(a => a.id === row.parentId)}
+                options={
+                    {
+                        selection: true,
+                        showSelectAllCheckbox: false,
+                        showTextRowsSelected: false
+                    }
+                }
+                actions={[
+                    {
+                        icon: AddIcon,
+                        tooltip: 'New',
+                        isFreeAction: false,
+                        onClick: () => setCreationFormActive(true)
+                    },
+                    {
+                        icon: AddIcon,
+                        tooltip: 'New',
+                        isFreeAction: true,
+                        onClick: () => setCreationFormActive(true)
+                    }
+                ]}
+                onSelectionChange={
+                    (rows: any[]) => setSelectedRequirements(rows.map((r: IRequirement) => r.id))
+                }
+            />
         }
-    </div>);
+        <Drawer anchor={'right'} open={creationFormActive} onClose={closeFormHandler}>
+            <CreationForm specification={specification} selections={selectedRequirements} onClose={closeFormHandler}
+                          onCreate={creationHandler}/>
+        </Drawer>
+    </>);
 }

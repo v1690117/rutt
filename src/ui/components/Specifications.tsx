@@ -1,20 +1,80 @@
 import * as React from "react";
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import {ISpecification} from "../interfaces/model";
-import MaterialTable from "material-table";
-import {tableIcons} from "./Specification.tsx";
 import {Link} from "react-router-dom";
+import {Button, ButtonGroup, Drawer, TextField} from "@material-ui/core";
+import AddIcon from '@material-ui/icons/Add';
+import Table from "./Table.tsx";
+
+interface ICreationFormProps {
+    onClose: () => void;
+    onCreate: () => void;
+}
+
+const CreationForm: any = (props: ICreationFormProps) => {
+    const [title, setTitle] = useState<string>("");
+    const create = () => {
+        fetch('/api/specifications', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({title})
+        }).then(props.onCreate).catch(alert);
+    };
+    return (
+        <>
+            <div>
+                <TextField id="title" label="Title" value={title}
+                           defaultValue={" "}
+                           onChange={(event: React.ChangeEvent<HTMLInputElement>) => setTitle(event.target.value)}
+                />
+            </div>
+            <ButtonGroup aria-label="outlined primary button group">
+                <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={props.onClose}
+                    size="small"
+                >
+                    Close
+                </Button>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={create}
+                    size="small"
+                >
+                    Create
+                </Button>
+            </ButtonGroup>
+        </>
+    );
+}
+
 
 export const Specifications: React.FC = () => {
     const [specifications, setSpecifications] = useState<ISpecification[]>([]);
-    useEffect(() => {
+    const [creationFormActive, setCreationFormActive] = useState<boolean>(false);
+    const fetchSpecifications = () => {
         fetch('/api/specifications')
             .then(r => r.json())
-            .then(setSpecifications);
+            .then(setSpecifications)
+            .catch(alert);
+    }
+    useEffect(() => {
+        fetchSpecifications();
+    }, []);
+    const closeFormHandler = useCallback(() => {
+        setCreationFormActive(false);
+    }, []);
+    const creationHandler = useCallback(() => {
+        fetchSpecifications();
+        setCreationFormActive(false);
     }, []);
     return (
-        <div style={{maxWidth: "100%"}}>
-            <MaterialTable
+        <>
+            <Table
                 columns={[
                     {
                         title: "ID",
@@ -24,12 +84,19 @@ export const Specifications: React.FC = () => {
                     {title: "Title", field: "title"}
                 ]}
                 data={specifications}
-                title="Demo Title"
-                icons={tableIcons as any}
-                options={
-                    {pageSize: 20, maxBodyHeight: 400, exportButton: true, exportAllData: true, sorting: false}
-                }
+                title="Specifications"
+                actions={[
+                    {
+                        icon: AddIcon,
+                        tooltip: 'New',
+                        isFreeAction: true,
+                        onClick: () => setCreationFormActive(true)
+                    }
+                ]}
             />
-        </div>
+            <Drawer anchor={'right'} open={creationFormActive} onClose={closeFormHandler}>
+                <CreationForm onClose={closeFormHandler} onCreate={creationHandler}/>
+            </Drawer>
+        </>
     );
 }
