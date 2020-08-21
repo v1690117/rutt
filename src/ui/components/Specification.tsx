@@ -34,6 +34,9 @@ export const Specification = (props: ISpecProps) => {
         fetchSpecification();
         setCreationFormActive(false);
     }, []);
+    const getSelectedRequirement = () => selectedRequirements
+    && selectedRequirements.length === 1
+        ? selectedRequirements[0] : undefined;
     return (<>
         {
             specification &&
@@ -89,9 +92,11 @@ export const Specification = (props: ISpecProps) => {
             />
         }
         <Drawer anchor={'right'} open={creationFormActive} onClose={closeFormHandler}>
-            <CreateRequirementForm specification={specification} selections={selectedRequirements}
-                                   onClose={closeFormHandler}
-                                   onCreate={creationHandler}/>
+            <CreateRequirementForm
+                specification={specification}
+                parentId={getSelectedRequirement()}
+                onClose={closeFormHandler}
+                onCreate={creationHandler}/>
         </Drawer>
     </>);
 }

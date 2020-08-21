@@ -1,10 +1,11 @@
 import * as React from "react";
 import {useState} from "react";
 import {Button, ButtonGroup, TextField} from "@material-ui/core";
+import {ITask} from "../interfaces/model";
 
 interface ICreationFormProps {
     onClose: () => void;
-    onCreate: () => void;
+    onCreate: (task: ITask) => void;
 }
 
 const CreateTaskForm: any = (props: ICreationFormProps) => {
@@ -16,8 +17,13 @@ const CreateTaskForm: any = (props: ICreationFormProps) => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({title, description})
-        }).then(props.onCreate).catch(alert);
+            body: JSON.stringify(
+                {
+                    title,
+                    description
+                }
+            )
+        }).then(r => r.json()).then(props.onCreate).catch(alert);
     };
     return (
         <>

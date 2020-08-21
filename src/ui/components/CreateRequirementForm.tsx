@@ -7,13 +7,12 @@ interface ICreationFormProps {
     onClose: () => void;
     onCreate: () => void;
     specification: ISpecification;
-    selections: number[];
+    parentId?: string;
 }
 
 const CreateRequirementForm: any = (props: ICreationFormProps) => {
     const [text, setText] = useState<string>("");
     const onCreateHandler = () => {
-        const parentId = props.selections && props.selections.length === 1 ? props.selections[0] : undefined;
         fetch('/api/requirements', {
             method: 'POST',
             headers: {
@@ -24,7 +23,7 @@ const CreateRequirementForm: any = (props: ICreationFormProps) => {
                 specification: {
                     id: props.specification.id
                 },
-                parentId
+                parentId: props.parentId
             })
         }).then(props.onCreate).catch(alert);
     };
