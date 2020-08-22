@@ -16,7 +16,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 public class RequirementController {
-    private final RequirementService service; // todo change by service
+    private final RequirementService service;
 
     @GetMapping(value = "/api/requirements")
     public List<RequirementDTO> getAll() {

@@ -35,6 +35,7 @@ public class SpecificationDTO {
             requirements.add(requirementDTO);
             dict.put(requirementDTO.getId(), requirementDTO);
         }
+        // todo temp decision to make UI easier
 //        dto.requirements = new LinkedList<>();
 //        requirements.forEach(requirementDTO -> {
 //            if (requirementDTO.getParentId() == null) {
