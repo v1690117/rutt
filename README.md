@@ -7,5 +7,23 @@
 [![using](https://img.shields.io/badge/backend-spring--boot-blue)](https://img.shields.io/badge/backend-spring--boot-blue) 
         
 #   RUTT        
-todo    
-
+RUTT is the app that could help you to trace your requirements, usecases 
+and implementation tasks for software development.  
+    
+Current status of the app is **WORK IN PROGRESS**.      
+        
+#   Running app 
+*   Clone project   
+```batch
+git clone git@github.com:v1690117/rutt.git
+or  
+git clone https://github.com/v1690117/rutt.git
+``` 
+*   Build project
+```batch
+mvn clean package
+```
+*   Run app
+```batch
+java -jar target/rutt-0.0.1-SNAPSHOT.jar
+``` 
