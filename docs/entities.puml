@@ -9,10 +9,11 @@ class Requirement {
     title: string
     text: string
 
+    specification: Specification
+    parent: Requirement | null
+    children: Requirement[]
     usecases: Usecase[]
     tasks: Task[]
-    children: Requirement[]
-    parent: Requirement | null
 }
 
 class Usecase {

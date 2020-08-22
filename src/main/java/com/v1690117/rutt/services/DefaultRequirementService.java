@@ -22,15 +22,19 @@ public class DefaultRequirementService implements RequirementService {
     @Override
     public List<RequirementDTO> findAll() {
         return requirementRepository.findAll().stream()
-                .map(RequirementDTO::fromRequirement)
+                .map(RequirementDTO::fromRequirementFull)
                 .collect(Collectors.toList());
     }
 
     @Override
     @Transactional(readOnly = true)
     public RequirementDTO findById(long id) {
-        // todo get relations
-        return RequirementDTO.fromRequirementFull(requirementRepository.findById(id).get());
+        Requirement requirement = requirementRepository.findById(id).get();
+        return RequirementDTO.fromRequirementFull(requirement).withChildren(
+                requirementRepository.findRequirementsBySpecificationId(
+                        requirement.getSpecification().getId()
+                )
+        );
     }
 
     @Override
@@ -39,7 +43,7 @@ public class DefaultRequirementService implements RequirementService {
                 requirementRepository.save(
                         new Requirement(
                                 null,
-                                null, // todo
+                                requirement.getSpecification().toSpecification(), // todo
                                 requirement.getText(),
                                 Collections.emptyList(),
                                 requirement.getParentId()

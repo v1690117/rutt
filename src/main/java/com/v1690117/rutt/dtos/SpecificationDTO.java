@@ -5,10 +5,12 @@ import com.v1690117.rutt.model.Specification;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Data
 @NoArgsConstructor
@@ -33,14 +35,25 @@ public class SpecificationDTO {
             requirements.add(requirementDTO);
             dict.put(requirementDTO.getId(), requirementDTO);
         }
-        dto.requirements = new LinkedList<>();
-        requirements.forEach(requirementDTO -> {
-            if (requirementDTO.getParentId() == null) {
-                dto.requirements.add(requirementDTO);
-            } else {
-                dict.get(requirementDTO.getParentId()).getChildren().add(requirementDTO);
-            }
-        });
+//        dto.requirements = new LinkedList<>();
+//        requirements.forEach(requirementDTO -> {
+//            if (requirementDTO.getParentId() == null) {
+//                dto.requirements.add(requirementDTO);
+//            } else {
+//                dict.get(requirementDTO.getParentId()).getChildren().add(requirementDTO);
+//            }
+//        });
+        dto.requirements = specification.getRequirements().stream().map(RequirementDTO::fromRequirementFull)
+                .collect(Collectors.toList());
         return dto;
+    }
+
+    public Specification toSpecification() {
+        return new Specification(
+                id,
+                title,
+                requirements == null ? Collections.emptyList()
+                        : requirements.stream().map(r -> new Requirement(r.getId())).collect(Collectors.toList())
+        );
     }
 }

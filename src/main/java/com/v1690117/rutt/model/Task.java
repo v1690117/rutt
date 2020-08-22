@@ -41,4 +41,8 @@ public class Task {
             inverseJoinColumns = {@JoinColumn(name = "requirement_id")}
     )
     private List<Requirement> requirements;
+
+    public Task(Long id) {
+        this.id = id;
+    }
 }

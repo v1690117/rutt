@@ -1,6 +1,8 @@
 package com.v1690117.rutt.dtos;
 
 import com.v1690117.rutt.model.Requirement;
+import com.v1690117.rutt.model.Specification;
+import com.v1690117.rutt.model.Task;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -35,5 +37,26 @@ public class RequirementDTO {
                 .map(TaskDTO::fromTask)
                 .collect(Collectors.toList());
         return dto;
+    }
+
+    public RequirementDTO withChildren(List<Requirement> requirements) {
+        requirements.forEach(requirement -> {
+            if (id.equals(requirement.getParentId())) {
+                children.add(
+                        fromRequirement(requirement)
+                );
+            }
+        });
+        return this;
+    }
+
+    public Requirement toRequirement() {
+        return new Requirement(
+                id,
+                new Specification(specification.getId()),
+                text,
+                tasks.stream().map(t -> new Task(t.getId())).collect(Collectors.toList()),
+                parentId
+        );
     }
 }

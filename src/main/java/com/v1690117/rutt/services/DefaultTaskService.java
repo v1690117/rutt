@@ -19,7 +19,7 @@ public class DefaultTaskService implements TaskService {
     @Override
     public List<TaskDTO> findAll() {
         return repository.findAll().stream()
-                .map(TaskDTO::fromTask)
+                .map(TaskDTO::fromTaskFull)
                 .collect(Collectors.toList());
     }
 
