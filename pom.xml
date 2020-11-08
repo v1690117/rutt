@@ -177,29 +177,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>cz.habarta.typescript-generator</groupId>
-                <artifactId>typescript-generator-maven-plugin</artifactId>
-                <version>1.25.322</version>
-                <executions>
-                    <execution>
-                        <id>generate</id>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <phase>process-classes</phase>
-                    </execution>
-                </executions>
-                <configuration>
-                    <jsonLibrary>jackson2</jsonLibrary>
-                    <classes>
-                        <class>com.v1690117.rutt.dtos.SpecificationDTO</class>
-                        <class>com.v1690117.rutt.dtos.RequirementDTO</class>
-                        <class>com.v1690117.rutt.dtos.TaskDTO</class>
-                    </classes>
-                    <outputKind>module</outputKind>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
 </project>
