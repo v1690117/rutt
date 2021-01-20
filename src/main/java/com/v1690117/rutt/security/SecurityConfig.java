@@ -11,7 +11,7 @@ package com.v1690117.rutt.security;
 
 //@Configuration
 //@EnableWebSecurity
-public class SecurityConfig {// extends WebSecurityConfigurerAdapter {
+public class SecurityConfig { // extends WebSecurityConfigurerAdapter {
 //    @Bean
 //    @Override
 //    protected UserDetailsService userDetailsService() {
