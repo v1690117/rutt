@@ -1,0 +1,76 @@
+@startuml
+title App components structure
+rectangle Requirements {
+    left to right direction
+    rectangle "Requirement Specification 1" as rsp1 {
+     rectangle "Requirement 1" as r1
+        rectangle "Requirement 2" as r2
+        rectangle "Requirement 3" as r3
+        rectangle "Requirement 4" as r4
+        rectangle "Requirement 5" as r5
+    }
+    rectangle "Requirement Specification 2" as rsp2 {
+        rectangle "Requirement 6" as r6
+        rectangle "Requirement 7" as r7
+        rectangle "Requirement 8" as r8
+        rectangle "Requirement 9" as r9
+        rectangle "Requirement 10" as r10
+    }
+}
+rectangle Usecases {
+    usecase "Usecase 1" as uc1
+    usecase "Usecase 2" as uc2
+    usecase "Usecase 3" as uc3
+    rectangle "Step 1" as s1
+    rectangle "Step 2" as s2
+    rectangle "Step 3" as s3
+    rectangle "Step 4" as s4
+    rectangle "Step 5" as s5
+    uc1 -- s1
+    uc1 -- s2
+    uc2 -- s3
+    uc3 -- s4
+    uc3 -- s5
+}
+r1 --- uc2
+r2 --- uc3
+r4 --- uc1
+r6 --- uc1
+r9 --- uc3
+r10 --- uc3
+rectangle Logic {
+    rectangle "App 1" as app1 {
+        rectangle "Logical component 1" as lc1 {
+          rectangle "Sub component 1" as slc1
+          rectangle "Sub component 2" as slc2
+        }
+        rectangle "Logical component 2" as lc2
+        rectangle "Logical component 3" as lc3
+        rectangle "Logical component 4" as lc4
+        rectangle "Logical component 5" as lc5
+    }
+}
+r1 .... lc1
+r2 .... lc3
+r6 .... lc3
+r7 .... lc4
+uc1 -- lc1
+uc1 -- lc2
+uc2 -- lc3
+rectangle "Task 1" as t1
+rectangle "Task 2" as t2
+rectangle "Task 3" as t3
+rectangle "Task 4" as t4
+rectangle "Task 5" as t5
+t1 - r1
+t1 - uc2
+t1 - slc1
+lc2 --- t2
+lc2 --- t3
+lc4 --- t4
+t5 -- r8
+note left of Requirements {
+    Requirement specification is structure.
+    Requirements could contain other requirements as children.
+}
+@enduml
