@@ -5,10 +5,12 @@ DROP TABLE IF EXISTS requirements;
 DROP TABLE IF EXISTS tasks;
 DROP TABLE IF EXISTS usecases;
 DROP TABLE IF EXISTS specifications;
+DROP TABLE IF EXISTS business_processes;
+DROP TABLE IF EXISTS bp_steps;
 
 CREATE TABLE specifications
 (
-    id   BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id    BIGINT       NOT NULL AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL
 );
 CREATE TABLE requirements
@@ -61,9 +63,9 @@ CREATE TABLE requirements_usecases
 );
 CREATE TABLE tasks_usecases
 (
-    id             BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    task_id BIGINT NOT NULL,
-    usecase_id     BIGINT NOT NULL,
+    id         BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    task_id    BIGINT NOT NULL,
+    usecase_id BIGINT NOT NULL,
     CONSTRAINT t_u_task_id_fk
         FOREIGN KEY (task_id)
             REFERENCES tasks (id),
@@ -71,3 +73,20 @@ CREATE TABLE tasks_usecases
         FOREIGN KEY (usecase_id)
             REFERENCES usecases (id)
 );
+CREATE TABLE business_processes
+(
+    id          BIGINT       NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    title       VARCHAR(255) NOT NULL,
+    description VARCHAR(2555)
+);
+CREATE TABLE bp_steps
+(
+    id          BIGINT       NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    title       VARCHAR(255) NOT NULL,
+    description VARCHAR(2555),
+    bp_id       BIGINT       NOT NULL,
+    CONSTRAINT bp_steps_bp_fk
+        FOREIGN KEY (bp_id)
+            REFERENCES business_processes (id)
+);
+

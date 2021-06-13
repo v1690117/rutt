@@ -50,3 +50,16 @@ INSERT INTO requirements_tasks
 VALUES (NULL, 1, 1);
 INSERT INTO requirements_tasks
 VALUES (NULL, 4, 4);
+
+INSERT INTO business_processes
+VALUES (1, 'Test Plan', 'Describes base steps for Test Plan creation.');
+INSERT INTO business_processes
+VALUES (2, 'Requirement BP Traceability', 'Describes base steps for Test Plan creation.');
+
+INSERT INTO bp_steps
+VALUES (1, 'Business Processes Description', '', 1);
+INSERT INTO bp_steps
+VALUES (2, 'Functional Specification Creation', '', 1);
+INSERT INTO bp_steps
+VALUES (3, 'BP - FS Matrix Creation', '', 1);
+
