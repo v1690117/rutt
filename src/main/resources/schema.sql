@@ -7,6 +7,8 @@ DROP TABLE IF EXISTS usecases;
 DROP TABLE IF EXISTS specifications;
 DROP TABLE IF EXISTS business_processes;
 DROP TABLE IF EXISTS bp_steps;
+DROP TABLE IF EXISTS functional_specifications;
+DROP TABLE IF EXISTS functions;
 
 CREATE TABLE specifications
 (
@@ -85,8 +87,24 @@ CREATE TABLE bp_steps
     title       VARCHAR(255) NOT NULL,
     description VARCHAR(2555),
     bp_id       BIGINT       NOT NULL,
-    CONSTRAINT bp_steps_bp_fk
+    CONSTRAINT bp_steps_bp_id_fk
         FOREIGN KEY (bp_id)
             REFERENCES business_processes (id)
+);
+CREATE TABLE functional_specifications
+(
+    id          BIGINT       NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    title       VARCHAR(255) NOT NULL,
+    description VARCHAR(2555)
+);
+CREATE TABLE functions
+(
+    id          BIGINT       NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    title       VARCHAR(255) NOT NULL,
+    description VARCHAR(2555),
+    fs_id       BIGINT       NOT NULL,
+    CONSTRAINT functions_fs_id_fk
+        FOREIGN KEY (fs_id)
+            REFERENCES functional_specifications (id)
 );
 

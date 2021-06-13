@@ -63,3 +63,20 @@ VALUES (2, 'Functional Specification Creation', '', 1);
 INSERT INTO bp_steps
 VALUES (3, 'BP - FS Matrix Creation', '', 1);
 
+INSERT INTO functional_specifications
+VALUES (1, 'Functional Specifications', 'Functions to work with Functional Specifications, its content and relations');
+INSERT INTO functional_specifications
+VALUES (2, 'Business Processes', 'Functions to work with Business Processes, its content and relations');
+
+INSERT INTO functions
+VALUES (1, 'Create FS',
+        'Creates new Functional Specification (FS) in the system. It is possible to provide title and description for the new FS.',
+        1);
+INSERT INTO functions
+VALUES (2, 'Edit FS',
+        'Provides possibility to change  new Functional Specification (FS) attributes', 1);
+INSERT INTO functions
+VALUES (3, 'Delete FS',
+        'Provides possibility to delete new Functional Specification (FS) from the system.
+To delete FS it is necessary to have special rights.',
+        1);
