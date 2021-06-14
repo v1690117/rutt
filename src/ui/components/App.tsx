@@ -1,57 +1,56 @@
 import * as React from "react";
-import {HashRouter as Router, Link, Route, Switch} from "react-router-dom";
-import {Task} from "./Task.tsx";
-import {Specification} from './Specification.tsx';
-import {Tasks} from './Tasks.tsx';
-import {Specifications} from './Specifications.tsx';
-import {Requirement} from "./Requirement.tsx";
-import {Paper, Tab, Tabs} from "@material-ui/core";
-import './../styles/index.css'
+import {FunctionComponent, useEffect, useRef, useState} from "react";
+import FunctionalSpecificationService from "../services/functionalSpecificationService";
+import {FunctionalSpecification} from "../model/model";
+import "./../styles/index.css"
 
+enum Categories {
+    FunctionalSpecifications,
+    BPs,
+    Tests,
+    Requirements
+}
+
+interface FunctionalSpecificationsProps {
+}
+
+const FunctionalSpecifications: FunctionComponent<FunctionalSpecificationsProps> = () => {
+    const service = useRef(new FunctionalSpecificationService());
+    const [specs, setSpecs] = useState<FunctionalSpecification[]>();
+    useEffect(() => {
+        service.current.getFunctionalSpecs().then(setSpecs);
+    }, []);
+    return <li>
+        {specs?.map(s => <ul>{s.title} | {s.description}</ul>)}
+    </li>
+}
 
 const App: React.FC = () => {
-    const [tab, setTab] = React.useState(0);
-    const changeTab = (event: React.ChangeEvent<{}>, newValue: number) => {
-        setTab(newValue);
-    };
-    return (
-        <Router>
-            <div className="toolbar">
-                <Paper square>
-                    <Tabs
-                        value={tab}
-                        indicatorColor="primary"
-                        textColor="primary"
-                        onChange={changeTab}
-                        aria-label="disabled tabs example"
-                    >
-                        <Tab label="Requirement specifications" to={"/specifications"} component={Link}/>
-                        <Tab label="Tasks" to={"/tasks"} component={Link}/>
-                        <Tab label="Usecases" to={"/usecases"} component={Link} disabled/>
-                    </Tabs>
-                </Paper>
-            </div>
-            <div className="content">
-                <Switch>
-                    <Route path="/specifications/:id"
-                           render={({match}) => <Specification id={match.params.id}/>}
-                    />
-                    <Route path="/specifications">
-                        <Specifications/>
-                    </Route>
-                    <Route path="/tasks/:id"
-                           render={({match}) => <Task id={match.params.id}/>}
-                    />
-                    <Route path="/requirements/:id"
-                           render={({match}) => <Requirement id={match.params.id}/>}
-                    />
-                    <Route path="/tasks">
-                        <Tasks/>
-                    </Route>
-                </Switch>
-            </div>
-        </Router>
-    );
+    const [category, setCategory] = useState<Categories>(Categories.FunctionalSpecifications);
+    const [id, setId] = useState<string | null>(null);
+    return <>
+        <div className="main-nav-bar">
+            <ul>
+                <li><a href="/">Projects</a></li>
+                <li><a href="/">Help</a></li>
+                <li><a href="/">About</a></li>
+                <li><a href="/">Sign in</a></li>
+            </ul>
+        </div>
+        <div className="side-nav-bar">
+            <ul>
+                <li><a href="/">Functional Specifciations</a></li>
+                <li><a href="/">Business Processes</a></li>
+                <li><a href="/">BP-FS Matrix</a></li>
+                <li><a href="/">Test Plans</a></li>
+                <li><a href="/">Requirements</a></li>
+                <li><a href="/">Project Settings</a></li>
+            </ul>
+        </div>
+        <div className="content">
+            {/*{category === Categories.FunctionalSpecifications && <FunctionalSpecifications/>}*/}
+        </div>
+    </>
 }
 
 export default App;
