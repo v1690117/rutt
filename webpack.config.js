@@ -9,6 +9,9 @@ module.exports = {
         filename: 'bundle.min.js',
         libraryTarget: 'umd'
     },
+    resolve: {
+        extensions: [".ts", ".tsx", ".js", ".jsx"]
+    },
     module: {
         rules: [
             {

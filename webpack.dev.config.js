@@ -4,6 +4,9 @@ const path = require('path');
 module.exports = {
     entry: './src/ui/index.tsx',
     devtool: 'inline-source-map',
+    resolve: {
+        extensions: [".ts", ".tsx", ".js", ".jsx"]
+    },
     output: {
         path: path.resolve(__dirname),
         filename: 'bundle.js',
