@@ -2,13 +2,13 @@ export interface Entity {
     id: string;
 }
 
-export interface ISpecification extends Entity {
+export interface RequirementSpecification extends Entity {
     title: string;
     requirements: IRequirement[];
 }
 
 export interface IRequirement extends Entity {
-    specification: ISpecification;
+    specification: RequirementSpecification;
     text: string;
     tasks: ITask[];
     parentId: number;

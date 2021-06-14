@@ -16,7 +16,7 @@ body {
     height: 32px;
     width: 100%;
     font-family: sans-serif;
-    border-bottom: 1px solid #000099;
+    border-bottom: 1px solid #9f9f9f;
 }
 
 .main-nav-bar > ul {
@@ -52,8 +52,8 @@ body {
     left: 0;
     width: 160px;
     height: calc(100% - 35px);
-    border-right: 1px solid #000099;
-    border-top: 1px solid #000099;
+    border-right: 1px solid #9f9f9f;
+    border-top: 1px solid #9f9f9f;
     background: #f5f0f0;
 }
 
@@ -119,7 +119,7 @@ body {
 .fs-row {
     margin-top: 10px;
     padding: 10px;
-    border-bottom: 1px solid #000099;
+    border-bottom: 1px solid #9f9f9f;
 }
 
 .fs-row-header {
@@ -135,4 +135,14 @@ body {
 
 .fs-row-content {
 
+}
+
+.warn-under-construction {
+    font-weight: bold;
+    font-size: xx-large;
+    position: absolute;
+    top: 45%;
+    left: calc(50% - 150px);
+    width: 300px;
+    text-align: center;
 }
