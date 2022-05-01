@@ -1,0 +1,27 @@
+@startuml
+rectangle IdentityService
+note right of IdentityService {
+    provides id and responsible
+}
+database "Identity DB" as idb
+note right of idb {
+    PostgreSQL
+}
+IdentityService --> idb : works with
+
+rectangle RequirementService
+database "Requirement DB" as rdb
+RequirementService --> rdb : works with
+note right of rdb {
+    Neo4j
+}
+
+rectangle ServiceDiscovery
+note right of ServiceDiscovery {
+    Provides info about available services
+}
+
+ServiceDiscovery <-- IdentityService : registers in
+ServiceDiscovery <-- RequirementService : registers in
+
+@enduml

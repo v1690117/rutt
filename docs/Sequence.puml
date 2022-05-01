@@ -1,0 +1,18 @@
+@startuml
+actor user
+participant identityService
+database identityDB
+participant serviceDiscovery
+database requirementDB
+
+user --> identityService : /objects/{id}?
+identityService --> identityDB : id?
+identityService <-- identityDB : {id, serviceId, namespaceId}
+identityService --> serviceDiscovery : serviceId?
+identityService <-- serviceDiscovery : {serviceId, serviceUrl}
+identityService --> requirementService : /requirements/{id}?
+requirementService --> requirementDB : id?
+requirementService <-- requirementDB : {requirement}
+identityService <-- requirementService : {requirement}
+user <-- identityService : {requirement}
+@enduml

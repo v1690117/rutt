@@ -13,7 +13,7 @@ But if project continues few years. All years are in rush. Customer needs more a
 * writing tests skill
 * using microservices
 * implementing auth*
-* try different databases
+* try different databases7
 
 * dynamic react modules
 
@@ -23,3 +23,7 @@ But if project continues few years. All years are in rush. Customer needs more a
 * Test module
 * Task module
 * integration with GL, RM, JIRA
+
+## Details
+![](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/v1690117/rutt/master/docs/Modules.puml)    
+![](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/v1690117/rutt/master/docs/Sequence.puml)    
