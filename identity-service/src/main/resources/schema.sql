@@ -1,0 +1,9 @@
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+DROP TABLE IF EXISTS objects;
+
+CREATE TABLE objects
+(
+  id    VARCHAR(36) PRIMARY KEY,
+  service_id  VARCHAR(36)
+);
