@@ -27,6 +27,7 @@ interface ButtonProps {
 /**
  * Primary UI component for user interaction
  */
+// todo move to styled components
 export const Button = ({
                            primary = false,
                            size = 'medium',
