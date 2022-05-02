@@ -1,12 +1,7 @@
 import RuttObject from "../interfaces/object";
+import IObjectService from "./IObjectService";
 
-export interface IObjectService {
-    url: () => string;
-
-    get: (id: string) => RuttObject;
-}
-
-export default class IdentityService implements IObjectService {
+export default class IdentityService implements IObjectService<RuttObject> {
     url(): string {
         return "/api/objects";
     }
@@ -17,5 +12,9 @@ export default class IdentityService implements IObjectService {
             id,
             serviceId: 'requirement-service'
         };
+    }
+
+    getAll(): RuttObject[] {
+        return [];
     }
 }

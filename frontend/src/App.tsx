@@ -1,17 +1,36 @@
 import 'antd/dist/antd.css';
-import React from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
+import Specification from "./interfaces/specification";
+import SpecificationService from './services/SpecificationService';
 
-const TestDiv = styled.div`
-    text-align: center;
-`
+const MyDiv = styled.div``;
+
+const SpecCard = (spec: Specification) => <tr key={spec.id}>
+    <td>{spec.title}</td>
+    <td>{spec.state}</td>
+    <td>{spec.owner}</td>
+    <td>{spec.namespace}</td>
+</tr>
 
 function App() {
-  return (
-    <TestDiv className="App">
-      This is just stub
-    </TestDiv>
-  );
+    const [data, setData] = useState<Specification[]>([]);
+    const specService = useRef<SpecificationService>(new SpecificationService());
+    useEffect(() => {
+        const specs = specService.current.getAll();
+        setData(specs);
+    }, []);
+    return (
+        <MyDiv>
+            <table>
+                <tbody>
+                {
+                    data.map(SpecCard)
+                }
+                </tbody>
+            </table>
+        </MyDiv>
+    );
 }
 
 export default App;
