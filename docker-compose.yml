@@ -12,6 +12,19 @@ services:
       POSTGRES_PASSWORD: "0"
     ports:
       - "5432:5432"
+  neo4j:
+    image: neo4j:latest
+    restart: always
+    volumes:
+      - ~/rutt/requirements/data:/data
+      - ~/rutt/requirements/logs:/logs
+      - ~/rutt/requirements/import:/var/lib/neo4j/import
+      - ~/rutt/requirements/plugins:/plugins
+    environment:
+      - NEO4J_AUTH=neo4j/0
+    ports:
+      - "7474:7474"
+      - "7687:7687"
   adminer:
     image: adminer
     restart: always

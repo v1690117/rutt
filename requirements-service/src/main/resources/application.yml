@@ -1,0 +1,15 @@
+server:
+  servlet:
+    context-path: /requirements
+  port: 8081
+spring:
+  neo4j:
+    uri: neo4j://localhost:7687
+    authentication:
+      username: neo4j
+      password: 0
+    database: neo4j
+springdoc:
+  api-docs:
+    path: "/api"
+
