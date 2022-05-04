@@ -1,6 +1,8 @@
 import 'antd/dist/antd.css';
+
 import React, {useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
+import { Header } from './components/Header/Header';
 import Specification from "./interfaces/specification";
 import SpecificationService from './services/SpecificationService';
 
@@ -22,6 +24,7 @@ function App() {
     }, []);
     return (
         <MyDiv>
+            <Header />
             <table>
                 <tbody>
                 {
