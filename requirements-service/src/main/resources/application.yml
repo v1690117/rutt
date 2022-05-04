@@ -3,6 +3,8 @@ server:
     context-path: /requirements
   port: 8081
 spring:
+  application:
+    name: requirements-service
   neo4j:
     uri: neo4j://localhost:7687
     authentication:

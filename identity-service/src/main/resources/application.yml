@@ -3,6 +3,8 @@ server:
     context-path: /identity
   port: 8080
 spring:
+  application:
+    name: identity-service
   datasource:
     url: "jdbc:postgresql://localhost:5432/identity"
     username: postgres
