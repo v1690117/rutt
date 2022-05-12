@@ -1,13 +1,9 @@
 import React, { useState } from 'react'
 import styled from 'styled-components';
+import { Header } from '../Header/Header';
 import { NewSpecPopup } from '../NewSpecPopup/NewSpecPopup';
 import { Toolbar } from '../Toolbar/Toolbar';
 import { SpecsContainer } from './Specifications.styles';
-
-const HeaderTitle = styled.h1`
-font-size: 2.5rem;
-text-transform: capitalize;
-`;
 
 export const Specifications = (props: any) => {
     const [create, setCreate] = useState(false)
@@ -33,9 +29,8 @@ export const Specifications = (props: any) => {
     return (
         <SpecsContainer>
 
-            <HeaderTitle>
-                specifications
-            </HeaderTitle>
+            <Header title='specifications' /> 
+                
             <Toolbar create={create} onCreateClick={onCreateClick} />
 
             {create &&
