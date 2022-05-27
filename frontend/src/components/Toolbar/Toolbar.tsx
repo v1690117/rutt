@@ -1,32 +1,17 @@
-import React from 'react'
-import styled from 'styled-components';
-import { Button } from '../Button/Button';
+import React from 'react';
+import { ToolbarButton, ToolbarButtonProps } from '../ToolbarButton/ToolbarButton';
+import { ToolbarContainer } from './Toolbar.styles';
 
-const ToolbarContainer = styled.ul`
-list-style: none;
-padding: 0;
-display: flex
-`
-const ToolbarItem = styled.li`
-margin-right: 2rem
-`
+export interface ToolbarProps {
+    buttons: ToolbarButtonProps[];
+}
 
-
-export const Toolbar = ({ create, onCreateClick }: any) => {
-
-    const onDeleteClick = () => {
-        console.log('Delete button was clicked')
-    }
-
+export const Toolbar: React.FC<ToolbarProps> = ({ buttons }) => {
     return (
         <ToolbarContainer>
-            <ToolbarItem>
-                <Button label='Create' onClick={onCreateClick}></Button>
-            </ToolbarItem>
-            <ToolbarItem>
-                <Button label='Delete' onClick={onDeleteClick}></Button>
-            </ToolbarItem>
+            {buttons.map(item =>
+                <ToolbarButton label={item.label} key={item.id} onClick={item.onClick}></ToolbarButton>
+            )}
         </ToolbarContainer>
     )
 }
-
