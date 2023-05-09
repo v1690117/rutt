@@ -1,32 +1,43 @@
 version: '3.1'
 
 services:
-  postgres:
-    image: postgres:latest
+#  identity-db:
+#    image: postgres:latest
+#    restart: always
+#    volumes:
+#      - .personal/tests-db/data:/var/lib/postgresql/data
+#    environment:
+#      POSTGRES_DB: "data"
+#      POSTGRES_USER: "postgres"
+#      POSTGRES_PASSWORD: "0"
+#    ports:
+#      - "5433:5432"
+  tests-db:
+    image: postgres:15.0.1
     restart: always
     volumes:
-      - ~/rutt/identity/data:/var/lib/postgresql/data
+      - .personal/tests-db/data:/var/lib/postgresql/data
     environment:
-      POSTGRES_DB: "identity"
+      POSTGRES_DB: "data"
       POSTGRES_USER: "postgres"
       POSTGRES_PASSWORD: "0"
     ports:
       - "5432:5432"
-  neo4j:
-    image: neo4j:latest
-    restart: always
-    volumes:
-      - ~/rutt/requirements/data:/data
-      - ~/rutt/requirements/logs:/logs
-      - ~/rutt/requirements/import:/var/lib/neo4j/import
-      - ~/rutt/requirements/plugins:/plugins
-    environment:
-      - NEO4J_AUTH=neo4j/0
-    ports:
-      - "7474:7474"
-      - "7687:7687"
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - "2080:8080"
+#  neo4j:
+#    image: neo4j:latest
+#    restart: always
+#    volumes:
+#      - ~/rutt/requirements/data:/data
+#      - ~/rutt/requirements/logs:/logs
+#      - ~/rutt/requirements/import:/var/lib/neo4j/import
+#      - ~/rutt/requirements/plugins:/plugins
+#    environment:
+#      - NEO4J_AUTH=neo4j/0
+#    ports:
+#      - "7474:7474"
+#      - "7687:7687"
+#  adminer:
+#    image: adminer
+#    restart: always
+#    ports:
+#      - "2080:8080"
