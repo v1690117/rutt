@@ -1,0 +1,35 @@
+@startuml
+class Suite {
+    title: string
+    cases: Case[]
+}
+
+class Case {
+    title: string
+    description: markdown
+
+    steps: Step[]
+}
+
+class Step {
+    title: string
+    index: int
+    description: markdown
+}
+
+'class CaseRun {
+'    // todo describe
+'    title: string
+'    date: timestamp
+'    status: OK | WARNINGS | ERRORS
+'}
+'
+'class StepRun {
+'    // todo describe
+'}
+
+Suite --> Case : Consists Of (N:N)
+Case --> Step : Consists Of (1:N)
+
+hide empty members
+@enduml
