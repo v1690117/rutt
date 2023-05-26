@@ -13,22 +13,25 @@ import jakarta.persistence.Table
 
 @Entity
 @Table(name = "test_step")
-open class Step {
+class Step {
     @Column(nullable = false)
-    open var name: String? = null
+    var name: String = ""
 
     @Column
-    open var description: String? = null
+    var description: String = ""
 
+    /**
+     * Used to persist position of this test step in case to DB
+     */
     @Column
-    open var index: Int? = null
+    var index: Int = -1
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "case_id")
     @JsonIgnore
-    open var case: Case? = null
+    var case: Case? = null
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    open val id: Long? = null
+    val id: Long? = null
 }

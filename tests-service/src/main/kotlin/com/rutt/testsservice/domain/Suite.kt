@@ -10,14 +10,14 @@ import jakarta.persistence.Table
 
 @Entity
 @Table(name = "test_suite")
-open class Suite {
+class Suite {
     @Column(nullable = false)
-    open var name: String? = null
+    var name: String? = null
 
     @OneToMany(mappedBy = "suite")
-    open var cases: MutableList<Case>? = null
+    var cases: MutableList<Case>? = null
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    open val id: Long? = null
+    val id: Long? = null
 }
