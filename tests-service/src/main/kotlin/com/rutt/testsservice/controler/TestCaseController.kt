@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RestController
 import java.util.*
 
 @RestController
-    @RequestMapping("tests-api/cases")
-class TestCaseController (private val caseService: CaseService){
+@RequestMapping("tests-api/cases")
+class TestCaseController(private val caseService: CaseService) {
 
     @GetMapping()
     fun findAllCases(): List<Case> {
@@ -55,27 +55,33 @@ class TestCaseController (private val caseService: CaseService){
     }
 
     @PostMapping("/{id}/add_step", consumes = ["application/json"])
-    fun addStepToCase(@RequestBody step: Step,
-                      @PathVariable(name = "id") caseId: Long,
-                      @RequestParam(required = false) index: Int?): Case {
+    fun addStepToCase(
+        @RequestBody step: Step,
+        @PathVariable(name = "id") caseId: Long,
+        @RequestParam(required = false) index: Int?
+    ): Case {
         val case = caseService.findById(caseId)
         caseService.addStepToCase(step, case, index)
         return caseService.save(case)
     }
 
     @PostMapping("/{id}/update_step", consumes = ["application/json"])
-    fun updateStepAtIndex(@PathVariable(name = "id") caseId: Long,
-                          @RequestParam index: Int,
-                          @RequestBody newStep: Step): Case {
+    fun updateStepAtIndex(
+        @PathVariable(name = "id") caseId: Long,
+        @RequestParam index: Int,
+        @RequestBody newStep: Step
+    ): Case {
         val case = caseService.findById(caseId)
         caseService.updateStepInCaseAtIndex(case, index, newStep)
         return caseService.save(case)
     }
 
     @GetMapping("/{id}/move_step")
-    fun moveStepInCase(@PathVariable(name = "id") caseId: Long,
-                       @RequestParam from: Int,
-                       @RequestParam to: Int): Case {
+    fun moveStepInCase(
+        @PathVariable(name = "id") caseId: Long,
+        @RequestParam from: Int,
+        @RequestParam to: Int
+    ): Case {
         val case = caseService.findById(caseId)
         case.moveStep(from, to)
         return caseService.save(case)
