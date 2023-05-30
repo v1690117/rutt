@@ -24,6 +24,7 @@ class Step {
      * Used to persist position of this test step in case to DB
      */
     @Column
+    @JsonIgnore
     var index: Int = -1
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -34,4 +35,9 @@ class Step {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null
+
+    fun copyFrom(other: Step) {
+        this.name = other.name
+        this.description = other.description
+    }
 }
