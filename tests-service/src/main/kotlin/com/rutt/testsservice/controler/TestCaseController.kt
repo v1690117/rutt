@@ -21,6 +21,7 @@ class TestCaseController(private val caseService: CaseService) {
 
     @GetMapping("/{id}")
     fun findCaseById(@PathVariable(name = "id") caseId: Long): Case {
+        val case = caseService.findById(caseId)
         return caseService.findById(caseId)
     }
 

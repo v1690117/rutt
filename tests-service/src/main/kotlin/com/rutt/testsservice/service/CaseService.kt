@@ -16,6 +16,10 @@ class CaseService(private val caseRepo: CaseRepository) {
     }
 
     fun save(case: Case): Case {
+        for (i in 0 until case.steps.size) {
+            case.steps[i].case = case
+            case.steps[i].index = i
+        }
         return caseRepo.save(case)
     }
 
