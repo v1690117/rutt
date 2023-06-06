@@ -24,7 +24,7 @@ class Case(
     @Column
     var description: String ="",
 
-    @OneToMany(cascade = [CascadeType.ALL])
+    @OneToMany(cascade = [CascadeType.ALL], orphanRemoval = true)
     @JoinColumn(name = "case_id")
     @OrderColumn(name = "index")
     var steps: MutableList<Step> = ArrayList(),
