@@ -2,36 +2,32 @@ package com.rutt.testsservice.controler
 
 import com.rutt.testsservice.domain.Case
 import com.rutt.testsservice.service.CaseService
-import org.springframework.web.bind.annotation.DeleteMapping
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PutMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("tests-api/cases")
 class TestCaseController(private val caseService: CaseService) {
-
-    @GetMapping
-    fun findAllCases(): List<Case> {
-        return caseService.findAllCases().toList()
+    @GetMapping("/cases")
+    fun findAll(): List<Case> {
+        return caseService.findAll().toList()
     }
 
-    @GetMapping("/{id}")
-    fun findCaseById(@PathVariable(name = "id") caseId: Long): Case {
-        val case = caseService.findById(caseId)
+    @GetMapping("/cases/{id}")
+    fun findById(@PathVariable(name = "id") caseId: Long): Case {
         return caseService.findById(caseId)
     }
 
-    @PutMapping
-    fun updateOrCreateCase(@RequestBody case: Case): Case {
-        return caseService.save(case)
+    @PostMapping("/cases")
+    fun create(@RequestBody case: Case): Case {
+        return caseService.create(case)
     }
 
-    @DeleteMapping("/{id}/delete")
-    fun deleteCase(@PathVariable(name = "id") caseId: Long) {
-        caseService.deleteCase(caseId)
+    @PutMapping("/cases")
+    fun update(@RequestBody case: Case): Case {
+        return caseService.update(case)
+    }
+
+    @DeleteMapping("/cases/{id}/delete")
+    fun delete(@PathVariable(name = "id") caseId: Long) {
+        caseService.delete(caseId)
     }
 }
