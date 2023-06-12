@@ -1,35 +1,20 @@
-import 'antd/dist/antd.css';
-import React, {useEffect, useRef, useState} from 'react';
-import styled from 'styled-components';
-import Specification from "./interfaces/specification";
-import SpecificationService from './services/SpecificationService';
-
-const MyDiv = styled.div``;
-
-const SpecCard = (spec: Specification) => <tr key={spec.id}>
-    <td>{spec.title}</td>
-    <td>{spec.state}</td>
-    <td>{spec.owner}</td>
-    <td>{spec.namespace}</td>
-</tr>
+import React from 'react';
+import MainToolbar from "./components/MainToolbar/MainToolbar";
+import NavBar from "./components/NavBar/NavBar";
+import Content from "./components/Content/Content";
+import {ThemeProvider} from "styled-components";
 
 function App() {
-    const [data, setData] = useState<Specification[]>([]);
-    const specService = useRef<SpecificationService>(new SpecificationService());
-    useEffect(() => {
-        const specs = specService.current.getAll();
-        setData(specs);
-    }, []);
+    const theme = {
+        main: '#214EEC',
+        second: '#D9D9D9'
+    }
     return (
-        <MyDiv>
-            <table>
-                <tbody>
-                {
-                    data.map(SpecCard)
-                }
-                </tbody>
-            </table>
-        </MyDiv>
+        <ThemeProvider theme={theme}>
+            <MainToolbar/>
+            <NavBar/>
+            <Content/>
+        </ThemeProvider>
     );
 }
 
