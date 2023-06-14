@@ -1,10 +1,21 @@
 import styled from 'styled-components';
 
-export const ButtonWrapper = styled.div`
+export const ButtonWrapper = styled.div<{ type: 'positive' | 'negative' }>`
+  background-color: ${props => props.type === 'positive'
+    ? props.theme.main.bgColor
+    : props.theme.second.bgColor};
+  color: ${props => props.type === 'positive'
+    ? props.theme.main.btnTextColor
+    : props.theme.second.btnTextColor};
+  box-shadow: ${props => props.type === 'positive'
+    ? props.theme.main.boxShadow
+    : props.theme.second.boxShadow};
+  border: ${props => props.type === 'positive'
+    ? props.theme.main.border
+    : props.theme.second.border};
+  
   width: 8rem;
   height: 2rem;
-  background-color: #214EEC;
-  color: #FFFFFF;
   border-radius: 10px;
   text-transform: capitalize;
   font-style: normal;
@@ -13,6 +24,5 @@ export const ButtonWrapper = styled.div`
   line-height: 2rem;
   text-align: center;
   vertical-align: middle;
-  cursor: pointer;
-  box-shadow: 2px 2px 5px rgb(5 145 255 / 30%);  
+  cursor: pointer;    
 `;
