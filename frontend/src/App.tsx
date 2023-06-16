@@ -6,10 +6,7 @@ import {ThemeProvider} from "styled-components";
 import { theme } from './themes/themes';
 
 function App() {
-    // const theme = {
-    //     main: '#214EEC',
-    //     second: '#D9D9D9'
-    // }
+    
     return (
         <ThemeProvider theme={theme}>
             <MainToolbar/>

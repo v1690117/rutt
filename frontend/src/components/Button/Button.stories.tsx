@@ -5,13 +5,6 @@ import styled from "styled-components";
 import { ThemeProvider } from "styled-components";
 import { theme } from '../../themes/themes';
 
-
-// const theme = {
-//   main: '#214EEC',
-//   second: '#D9D9D9'
-// }
-
-
 const Container = styled.div`
   border: 2px solid violet;
   padding: 5px;
