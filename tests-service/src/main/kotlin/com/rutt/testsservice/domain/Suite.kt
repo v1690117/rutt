@@ -1,26 +1,28 @@
 package com.rutt.testsservice.domain
 
-import jakarta.persistence.CascadeType
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
-import jakarta.persistence.Id
-import jakarta.persistence.JoinColumn
-import jakarta.persistence.OneToMany
-import jakarta.persistence.Table
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import jakarta.persistence.*
 
 @Entity
 @Table(name = "test_suite")
-class Suite {
+class Suite(
     @Column(nullable = false)
-    var name: String? = null
+    var title: String?,
 
-    @OneToMany(cascade = [CascadeType.ALL])
-    @JoinColumn(name = "suite_id")
-    var cases: MutableList<Case>? = null
+    @Column
+    var description: String?,
+
+    @ManyToMany
+    @JoinTable(
+        name = "suite_cases",
+        joinColumns = [JoinColumn(name = "suite_id", referencedColumnName = "suite_id")],
+        inverseJoinColumns = [JoinColumn(name = "case_id", referencedColumnName = "case_id")],
+    )
+    @JsonIgnoreProperties("suites")
+    var cases: List<Case>? = null,
 
     @Id
+    @Column(name = "suite_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null
-}
+)

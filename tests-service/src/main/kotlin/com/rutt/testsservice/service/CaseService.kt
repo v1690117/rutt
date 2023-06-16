@@ -6,16 +6,15 @@ import org.springframework.stereotype.Service
 
 @Service
 class CaseService(private val caseRepo: CaseRepository) {
-
     fun findById(id: Long): Case {
         return caseRepo.findById(id).orElseThrow { NoSuchElementException("No test case with id = $id found") }
     }
 
-    fun findAllCases(): Iterable<Case> {
+    fun findAll(): Iterable<Case> {
         return caseRepo.findAll()
     }
 
-    fun save(case: Case): Case {
+    fun create(case: Case): Case {
         for (i in 0 until case.steps.size) {
             case.steps[i].case = case
             case.steps[i].index = i
@@ -23,7 +22,12 @@ class CaseService(private val caseRepo: CaseRepository) {
         return caseRepo.save(case)
     }
 
-    fun deleteCase(caseId: Long) {
+    fun update(case: Case): Case {
+        // todo temp decision
+        return create(case);
+    }
+
+    fun delete(caseId: Long) {
         caseRepo.deleteById(caseId)
     }
 }
