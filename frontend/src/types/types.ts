@@ -10,3 +10,11 @@ export type FlexPropsType = {
     justify?: string,
     margin?: string 
 }
+
+export type AvatarPropsType = {
+    onClick?: () => void
+    user?: {
+        name: string,
+        lastName: string
+    } 
+}
