@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentMeta, StoryObj } from '@storybook/react';
-import Button from "./Button";
-import styled, { ThemeProvider } from "styled-components";
+import Avatar from './Avatar';
+import styled, { ThemeProvider } from 'styled-components';
 import { theme } from '../../themes/themes';
 import GlobalStyle from '../common/GlobalStyle/GlobalStyle';
 
@@ -12,21 +12,24 @@ const Container = styled.div`
   flex-direction: row;
   gap: 16px;
 `
+const user = {
+    name: 'Vla',
+    lastName: 'Ves'
+}
 
 export default {
-    title: 'Components/Button',
-    component: Button,
+    title: 'Components/Avatar',
+    component: Avatar,
     argTypes: {},
-} as ComponentMeta<typeof Button>;
+} as ComponentMeta<typeof Avatar>;
 
-export const Basic: StoryObj<typeof Button> = {
+export const Basic: StoryObj<typeof Avatar> = {
     render: () =>
         <>
             <GlobalStyle />
             <ThemeProvider theme={theme}>
                 <Container>
-                    <Button title='create' type='positive' onClick={() => console.log('clicked')} />
-                    <Button title='cancel' type='negative' onClick={() => console.log('canceled')} />
+                    <Avatar user={user} onClick={() => console.log(user)} />
                 </Container>
             </ThemeProvider>
         </>,

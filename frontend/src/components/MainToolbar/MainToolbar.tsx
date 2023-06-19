@@ -1,8 +1,13 @@
-import React from "react";
-import {MainToolbarWrapper} from "./MainToolbar.styles";
+import React from 'react';
+import { MainToolbarWrapper } from './MainToolbar.styles';
+import Logo from '../Logo/Logo';
+import Avatar from '../Avatar/Avatar';
 
-function MainToolbar() {
-    return <MainToolbarWrapper>Main Toolbar</MainToolbarWrapper>
+const MainToolbar: React.FC = (props: any) => {
+    return <MainToolbarWrapper>
+        <Logo />
+        <Avatar user={{ name: 'Vla', lastName: 'Ves' }} />
+    </MainToolbarWrapper>
 }
 
 export default MainToolbar;

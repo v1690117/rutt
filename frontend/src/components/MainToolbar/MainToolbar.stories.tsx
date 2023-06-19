@@ -1,6 +1,6 @@
 import React from 'react';
 import { ComponentMeta, StoryObj } from '@storybook/react';
-import Button from "./Button";
+import MainToolbar from "./MainToolbar";
 import styled, { ThemeProvider } from "styled-components";
 import { theme } from '../../themes/themes';
 import GlobalStyle from '../common/GlobalStyle/GlobalStyle';
@@ -14,19 +14,18 @@ const Container = styled.div`
 `
 
 export default {
-    title: 'Components/Button',
-    component: Button,
+    title: 'Components/MainToolbar',
+    component: MainToolbar,
     argTypes: {},
-} as ComponentMeta<typeof Button>;
+} as ComponentMeta<typeof MainToolbar>;
 
-export const Basic: StoryObj<typeof Button> = {
+export const Basic: StoryObj<typeof MainToolbar> = {
     render: () =>
         <>
             <GlobalStyle />
             <ThemeProvider theme={theme}>
                 <Container>
-                    <Button title='create' type='positive' onClick={() => console.log('clicked')} />
-                    <Button title='cancel' type='negative' onClick={() => console.log('canceled')} />
+                    <MainToolbar />
                 </Container>
             </ThemeProvider>
         </>,
