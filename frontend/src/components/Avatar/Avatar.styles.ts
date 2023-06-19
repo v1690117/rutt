@@ -6,6 +6,7 @@ color: ${props => props.theme.colors.main};
 width: 64px;
 height: 64px;
 border-radius: 50%;
+padding: 17px 14px 18px 14px;
 display: flex;
 justify-content: center;
 align-items: center;

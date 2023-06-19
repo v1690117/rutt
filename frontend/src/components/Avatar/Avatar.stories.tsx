@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentMeta, StoryObj } from '@storybook/react';
 import Avatar from './Avatar';
-import styled, { ThemeProvider } from "styled-components";
+import styled, { ThemeProvider } from 'styled-components';
 import { theme } from '../../themes/themes';
 import GlobalStyle from '../common/GlobalStyle/GlobalStyle';
 
