@@ -13,6 +13,6 @@ text-decoration: none;
 
 &.active {
     border-bottom: 1px solid ${props => props.theme.colors.main}; 
+    margin-right: auto;
 };
-
 `;

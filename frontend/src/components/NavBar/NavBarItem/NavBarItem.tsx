@@ -7,7 +7,8 @@ type NavBarItemPropsType = {
 }
 
 const NavBarItem: React.FC<NavBarItemPropsType> = (props) => {
-    return <NavBarItemWrapper {...props}>
+
+    return <NavBarItemWrapper {...props} >
         {props.title}
     </NavBarItemWrapper>
 }
