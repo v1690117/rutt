@@ -4,8 +4,10 @@ import MainToolbar from "./MainToolbar";
 import styled, { ThemeProvider } from "styled-components";
 import { theme } from '../../themes/themes';
 import GlobalStyle from '../common/GlobalStyle/GlobalStyle';
+import { BrowserRouter } from 'react-router-dom';
 
 const Container = styled.div`
+  width: 1450px;
   border: 2px solid violet;
   padding: 5px;
   display: flex;
@@ -21,12 +23,12 @@ export default {
 
 export const Basic: StoryObj<typeof MainToolbar> = {
     render: () =>
-        <>
+        <BrowserRouter>
             <GlobalStyle />
             <ThemeProvider theme={theme}>
                 <Container>
                     <MainToolbar />
                 </Container>
             </ThemeProvider>
-        </>,
+        </BrowserRouter>,
 };

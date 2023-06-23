@@ -7,6 +7,7 @@ import { theme } from '../../themes/themes';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 const Container = styled.div`
+  width: 1450px;
   background: violet;
   padding: 5px;
 `

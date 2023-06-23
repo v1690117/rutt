@@ -9,7 +9,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 const Container = styled.div`
 background: violet;
 padding: 5px;
-`
+`;
 
 export default {
     title: 'Components/NavBarItem',

@@ -10,8 +10,8 @@ export const ButtonWrapper = styled.div<{ type: 'positive' | 'negative' }>`
   border: 1px solid ${props => props.theme.colors.main};
   box-shadow: 2px 2px 5px ${props => props.theme.rgbaColors.main};
   display: inline-block;
-  padding: 4px 16px;
-  height: 37px;
+  padding: 2px 16px;
+  height: 28px;
   border-radius: 10px;  
   text-transform: capitalize;
   cursor: pointer;

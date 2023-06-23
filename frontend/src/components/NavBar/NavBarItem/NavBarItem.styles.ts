@@ -8,8 +8,9 @@ display: inline-block;
 padding: 10px;
 font-weight: 700;
 cursor: pointer; 
-margin-right: 20px;
+margin-right: 24px;
 text-decoration: none;
+height: 44px;
 
 &.active {
     border-bottom: 1px solid ${props => props.theme.colors.main}; 

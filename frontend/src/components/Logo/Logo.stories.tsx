@@ -4,6 +4,7 @@ import Logo from "./Logo";
 import styled, { ThemeProvider } from "styled-components";
 import { theme } from '../../themes/themes';
 import GlobalStyle from '../common/GlobalStyle/GlobalStyle';
+import { BrowserRouter } from 'react-router-dom';
 
 const Container = styled.div`
   border: 2px solid violet;
@@ -21,12 +22,12 @@ export default {
 
 export const Basic: StoryObj<typeof Logo> = {
     render: () =>
-        <>
+        <BrowserRouter>
             <GlobalStyle />
             <ThemeProvider theme={theme}>
                 <Container>
                     <Logo />
                 </Container>
             </ThemeProvider>
-        </>,
+        </BrowserRouter>,
 };
