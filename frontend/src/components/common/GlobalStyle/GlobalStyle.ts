@@ -8,8 +8,8 @@ const GlobalStyle = createGlobalStyle`
     font-family: Inter, sans-serif;
     font-style: normal;
     font-weight: 400;
-    font-size: 24px;
-    line-height: 29px;
+    font-size: 20px;
+    line-height: 24.2px;
     text-align: center;
     vertical-align: middle;
 }

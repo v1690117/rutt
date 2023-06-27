@@ -8,7 +8,7 @@ const Avatar: React.FC<AvatarPropsType> = (props) => {
 
     useEffect(() => {
         if (user) {
-            const getLetter = (arg: string) => arg.substring(0, 1).toLowerCase();
+            const getLetter = (arg: string) => arg.substring(0, 1).toUpperCase();
             setValue(getLetter(user.name) + getLetter(user.lastName));
         }
     }, [user])

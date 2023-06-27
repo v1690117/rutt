@@ -1,35 +1,31 @@
 import React from 'react';
 import { ComponentMeta, StoryObj } from '@storybook/react';
-import NavBar from "./NavBar";
+import NavBarItem from "./NavBarItem";
 import styled, { ThemeProvider } from "styled-components";
-import GlobalStyle from '../common/GlobalStyle/GlobalStyle';
-import { theme } from '../../themes/themes';
+import GlobalStyle from '../../common/GlobalStyle/GlobalStyle';
+import { theme } from '../../../themes/themes';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 const Container = styled.div`
-  width: 1450px;
-  background: violet;
-  padding: 5px;
-`
+background: violet;
+padding: 5px;
+`;
 
 export default {
-    title: 'Components/NavBar',
-    component: NavBar,
+    title: 'Components/NavBarItem',
+    component: NavBarItem,
     argTypes: {},
-} as ComponentMeta<typeof NavBar>;
+} as ComponentMeta<typeof NavBarItem>;
 
-export const Basic: StoryObj<typeof NavBar> = {
+export const Basic: StoryObj<typeof NavBarItem> = {
     render: () =>
         <BrowserRouter>
             <GlobalStyle />
             <ThemeProvider theme={theme}>
                 <Container>
-                    <NavBar />
+                    <NavBarItem title='Requirements' to='/requirements' />
                     <Routes>
                         <Route path="/requirements" element={<div>Requirements</div>} />
-                        <Route path="/cases" element={<div>Use Cases</div>} />
-                        <Route path="/tests" element={<div>Test Suits</div>} />
-                        <Route path="*" element={<div>404 NOT FOUND</div>} />
                     </Routes>
                 </Container>
             </ThemeProvider>
