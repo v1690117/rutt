@@ -18,3 +18,8 @@ export type AvatarPropsType = {
         lastName: string
     } 
 }
+
+export type FormFieldPropsType = {
+    onChange: (e: any) => void
+    value: string     
+}
