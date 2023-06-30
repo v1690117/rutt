@@ -6,7 +6,7 @@ spring:
   datasource:
     username: postgres
     password: 0
-    url: jdbc:postgresql://${params.postgres.host}}:${params.postgres.port}/data
+    url: jdbc:postgresql://${params.postgres.host}:${params.postgres.port}/data
   jpa:
     hibernate:
       ddl-auto: create
