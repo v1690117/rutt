@@ -16,13 +16,23 @@ services:
     image: postgres:15.2
     restart: always
     volumes:
-      - .personal/tests-db/data:/var/lib/postgresql/data
+      - ./tests-db/data:/var/lib/postgresql/data
     environment:
       POSTGRES_DB: "data"
       POSTGRES_USER: "postgres"
       POSTGRES_PASSWORD: "0"
     ports:
       - "5432:5432"
+  tests-service:
+    image: tests-service
+    restart: always
+    ports:
+      - "7080:8080"
+    command:
+      - "java"
+      - "-jar"
+      - "-Dparams.postgres.host=tests-db"
+      - "app.jar"
 #  neo4j:
 #    image: neo4j:latest
 #    restart: always
