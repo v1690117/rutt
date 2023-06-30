@@ -16,7 +16,7 @@ services:
     image: postgres:15.2
     restart: always
     volumes:
-      - ./tests-db/data:/var/lib/postgresql/data
+      - ./.local/tests-db/data:/var/lib/postgresql/data
     environment:
       POSTGRES_DB: "data"
       POSTGRES_USER: "postgres"
