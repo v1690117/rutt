@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ActionBarWrapper } from "./ActionBar.styles";
 import ActionBarItem from "./ActionBarItem/ActionBarItem";
+import { ContentItemStateType } from "../../../types/types";
 
-function ActionBar() {
-    const actionBarItemValues = [
+function ActionBar(props: any) {
+    const actionBarItemValues: ContentItemStateType = [
         {
             title: 'New Requirement Specification',
             isActive: false
@@ -19,6 +20,10 @@ function ActionBar() {
     ]
 
     const [values, setValues] = useState(actionBarItemValues)
+
+    useEffect(() => {
+        props.isActivated(values)
+    }, [props, values])
 
     const onClick = (e: any) => {
         const newValues = [...values]

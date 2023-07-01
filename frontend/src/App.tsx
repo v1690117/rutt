@@ -7,7 +7,6 @@ import { theme } from './themes/themes';
 import GlobalStyle from './components/common/GlobalStyle/GlobalStyle';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-
 function App() {
 
     return (
@@ -16,17 +15,14 @@ function App() {
                 <GlobalStyle />
                 <ThemeProvider theme={theme}>
                     <MainToolbar />
-                    <NavBar />
-                    <Content />
-                    {/* added for routing testing purposes */}
+                    <NavBar />                    
                     <Routes>
-                        <Route path="/" element={<div>ROOT</div>} />
-                        <Route path="/requirements" element={<div>Requirements</div>} />
-                        <Route path="/cases" element={<div>Use Cases</div>} />
-                        <Route path="/tests" element={<div>Test Suits</div>} />
+                        <Route path="/" element={<Content type={'main'}/>} />
+                        <Route path="/requirements" element={<Content type={'requirements'}/>} />
+                        <Route path="/cases" element={<Content type={'cases'}/>}  />
+                        <Route path="/tests" element={<Content type={'tests'}/>}  />
                         <Route path="*" element={<div>404 NOT FOUND</div>} />
                     </Routes>
-
                 </ThemeProvider >
             </BrowserRouter>
         </>
