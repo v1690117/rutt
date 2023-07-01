@@ -23,3 +23,5 @@ export type FormFieldPropsType = {
     onChange: (e: any) => void
     value: string     
 }
+
+export type ContentItemStateType = {title: string, isActive: boolean}[]
