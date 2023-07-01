@@ -6,12 +6,15 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     box-sizing: border-box; 
     font-family: Inter, sans-serif;
-    font-style: normal;
-    font-weight: 400;
+    font-style: normal;    
     font-size: 20px;
     line-height: 24.2px;
     text-align: center;
     vertical-align: middle;
+    color: inherit;
+}, 
+{
+    font-weight: 400;
 }
 `
 
