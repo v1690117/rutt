@@ -22,9 +22,9 @@ class SuiteController(private val suiteService: SuiteService) {
         return suiteService.create(suite)
     }
 
-    @PutMapping("/suites")
-    fun update(@RequestBody suite: Suite): Suite {
-        return suiteService.update(suite)
+    @PutMapping("/suites/{id}")
+    fun update(@RequestBody suite: Suite, @PathVariable id: Long): Suite {
+        return suiteService.update(id, suite)
     }
 
     @DeleteMapping("/suites/{id}")

@@ -25,4 +25,8 @@ class Suite(
     @Column(name = "suite_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null
-)
+) {
+    override fun toString(): String {
+        return "Suite(title=$title, description=$description, cases=$cases, id=$id)"
+    }
+}
