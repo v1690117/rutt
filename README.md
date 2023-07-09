@@ -40,7 +40,7 @@ todo
 1. Go to frontend folder
 2. Add file `.env.local`
 
-```json
+```
 proxy_enabled=true
 proxy_server=${
   YOUR_BACKEND_SERVER_URL
