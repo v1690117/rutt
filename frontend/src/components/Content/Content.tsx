@@ -40,7 +40,7 @@ const Content: React.FC<ContentPropsType> = (props) => {
         }
         {props.type === 'tests' &&
             <div>
-                {suites.map(s => <div>{s.title} {s.description}</div>)}
+                {suites.map(s => <div><a href='#'>#{s.id}</a> {s.title} {s.description}</div>)}
             </div>
         }
     </ContentWrapper>
