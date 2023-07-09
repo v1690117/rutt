@@ -1,7 +1,7 @@
 import RuttObject from "./object";
 
-export default interface Specification extends RuttObject{
+export default interface Suite extends RuttObject {
     title: string;
-    owner: string;
+    description: string;
     state: 'draft' | 'published' | 'obsolete';
 }
