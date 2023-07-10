@@ -1,13 +1,15 @@
 package com.rutt.testsservice.service
 
+import com.rutt.testsservice.domain.Case
 import com.rutt.testsservice.domain.Suite
+import com.rutt.testsservice.repository.CaseRepository
 import com.rutt.testsservice.repository.SuiteRepository
 import org.springframework.stereotype.Service
 import java.util.logging.Logger
 import kotlin.reflect.KMutableProperty
 import kotlin.reflect.full.declaredMemberProperties
 @Service
-class SuiteService(private val suiteRepository: SuiteRepository) {
+class SuiteService(private val suiteRepository: SuiteRepository, private val caseRepository: CaseRepository) {
     val log: Logger = Logger.getLogger(this.javaClass.name)
 
     fun findAll(): MutableIterable<Suite> {
@@ -24,24 +26,32 @@ class SuiteService(private val suiteRepository: SuiteRepository) {
 
     fun update(id: Long, source: Suite): Suite {
         val suiteToUpdate = suiteRepository.findById(id).orElseThrow()
-        copyNonNullMutableFields(source, suiteToUpdate)
+
+        if (source.title != null) {
+            suiteToUpdate.title = source.title
+        }
+        if (source.description != null) {
+            suiteToUpdate.description = source.description
+        }
+        val cases = source.cases
+        if (cases.isNotEmpty()) {
+            suiteToUpdate.cases = cases
+        }
         return suiteRepository.save(suiteToUpdate)
+    }
+
+    fun addNewCasesToSuite(cases: List<Case>, suiteId: Long): Suite {
+        val suite = suiteRepository.findById(suiteId).orElseThrow()
+        suite.cases.addAll(cases)
+        return suiteRepository.save(suite)
+    }
+
+    fun addExistingCasesToSuiteById(ids: List<Long>, suiteId: Long): Suite {
+        val cases = caseRepository.findAllById(ids).toList()
+        return addNewCasesToSuite(cases, suiteId)
     }
 
     fun delete(id: Long) {
         suiteRepository.deleteById(id)
     }
-
-    private fun copyNonNullMutableFields(src: Suite, dst: Suite) {
-        val fields = Suite::class.declaredMemberProperties
-
-        for (f in fields) {
-            if (f is KMutableProperty<*> && f.getter.call(src) != null) {
-                val oldValue = f.getter.call(src)
-                f.setter.call(dst, f.getter.call(src))
-                log.config("Suite id = ${dst.id} property changed: ${f.name}: $oldValue -> ${f.getter.call(dst)}")
-            }
-        }
-    }
-
 }

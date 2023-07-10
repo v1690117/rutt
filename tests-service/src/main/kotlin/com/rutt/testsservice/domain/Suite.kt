@@ -19,7 +19,7 @@ class Suite(
         inverseJoinColumns = [JoinColumn(name = "case_id", referencedColumnName = "case_id")],
     )
     @JsonIgnoreProperties("suites")
-    var cases: List<Case>? = null,
+    var cases: MutableList<Case> = arrayListOf(),
 
     @Id
     @Column(name = "suite_id")
