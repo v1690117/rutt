@@ -1,10 +1,11 @@
-import React, {useEffect, useRef, useState} from "react";
-import {ContentWrapper} from "./Content.styles";
+import React, { useEffect, useRef, useState } from "react";
+import { ContentWrapper } from "./Content.styles";
 import ActionBar from "./ActionBar/ActionBar";
 import TestSuiteCreationForm from "./TestSuites/TestSuiteCreationForm/TestSuiteCreationForm";
-import {ContentItemStateType} from "../../types/types";
+import { ContentItemStateType } from "../../types/types";
 import SuitesService from "../../services/SuitesService";
 import Suite from "../../interfaces/suite";
+import TestSuiteCard from "./TestSuites/TestSuiteCreationForm/TestSuiteCard/TestSuiteCard";
 
 type ContentPropsType = {
     type: 'main' | 'requirements' | 'cases' | 'tests'
@@ -20,6 +21,11 @@ const Content: React.FC<ContentPropsType> = (props) => {
         suiteService.current.getAll().then(setSuites)
     }, []);
 
+    const tempSuitState = {
+        count: 15,
+        date: '11/11/2011 13:13:13'
+    }
+
     const isActivated = (state: ContentItemStateType) => {
         const isActivatedValue = state.some((element: { isActive: boolean }) => element.isActive === true)
         setActivated(isActivatedValue)
@@ -28,8 +34,8 @@ const Content: React.FC<ContentPropsType> = (props) => {
     return <ContentWrapper>
         {props.type === 'main' &&
             <>
-                <ActionBar isActivated={isActivated}/>
-                {activated && <TestSuiteCreationForm/>}
+                <ActionBar isActivated={isActivated} />
+                {activated && <TestSuiteCreationForm />}
             </>
         }
         {props.type === 'requirements' &&
@@ -40,7 +46,12 @@ const Content: React.FC<ContentPropsType> = (props) => {
         }
         {props.type === 'tests' &&
             <div>
-                {suites.map(s => <div><a href='#'>#{s.id}</a> {s.title} {s.description}</div>)}
+                {/* {suites.map(s => <div><a href='#'>#{s.id}</a> {s.title} {s.description}</div>)} */}
+                {suites.map(s => <TestSuiteCard
+                    {...s}
+                    count={tempSuitState.count}
+                    date={tempSuitState.date}
+                    key={s.id} />)}
             </div>
         }
     </ContentWrapper>
