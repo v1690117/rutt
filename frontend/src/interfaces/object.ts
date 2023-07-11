@@ -1,5 +1,5 @@
 export default interface RuttObject {
     id: number;
-    serviceId: string;
+    serviceId?: string;
     namespace?: string;
 }
