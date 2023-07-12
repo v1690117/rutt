@@ -46,7 +46,6 @@ const Content: React.FC<ContentPropsType> = (props) => {
         }
         {props.type === 'tests' &&
             <div>
-                {/* {suites.map(s => <div><a href='#'>#{s.id}</a> {s.title} {s.description}</div>)} */}
                 {suites.map(s => <TestSuiteCard
                     {...s}
                     count={tempSuitState.count}
