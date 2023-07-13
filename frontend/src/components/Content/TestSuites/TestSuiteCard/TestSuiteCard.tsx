@@ -12,13 +12,13 @@ type TestSuiteCardPropsType = {
     title: string,
     description: string,
     count: number,
-    date: string,
+    date: string
 }
 
 const TestSuiteCard: React.FC<TestSuiteCardPropsType> = (props) => {
     const { id, title, description, count, date } = props
 
-    return <TestSuiteCardWrapper>
+    return <TestSuiteCardWrapper to={`/tests/${id}`}>
         <TestSuiteCardItemEmpty />
         <TestSuiteCardItemId value={id} />
         <TestSuiteCardItemTitle value={title} />

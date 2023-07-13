@@ -23,5 +23,6 @@ export type ContentItemStateType = {
 }[]
 
 export type TestSuiteCardItemPropsType = {
-    value?: string | number
+    value?: string | number,
+    onClick?: (e: any) => void
 }

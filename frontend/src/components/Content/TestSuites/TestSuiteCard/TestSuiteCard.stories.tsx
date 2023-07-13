@@ -2,8 +2,8 @@ import React from 'react';
 import { ComponentMeta, StoryObj } from '@storybook/react';
 import TestSuiteCard from "./TestSuiteCard";
 import styled, { ThemeProvider } from "styled-components";
-import GlobalStyle from '../../../../common/GlobalStyle/GlobalStyle';
-import { theme } from '../../../../../themes/themes';
+import GlobalStyle from '../../../common/GlobalStyle/GlobalStyle';
+import { theme } from '../../../../themes/themes';
 
 const Container = styled.div`
 border: 1px solid violet;

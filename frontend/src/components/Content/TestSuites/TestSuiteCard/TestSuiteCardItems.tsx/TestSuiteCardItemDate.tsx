@@ -1,6 +1,6 @@
 import React from "react";
 import { TestSuiteCardItemDateWrapper } from "./TestSuiteCardItemDate.styles";
-import { TestSuiteCardItemPropsType } from "../../../../../../types/types";
+import { TestSuiteCardItemPropsType } from "../../../../../types/types";
 
 const TestSuiteCardItemDate: React.FC<TestSuiteCardItemPropsType> = (props) => {
 

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { TestSuiteCardItemPropsType } from '../../../../../../types/types';
+import { TestSuiteCardItemPropsType } from '../../../../../types/types';
 
 export const TestSuiteCardItemDescriptionWrapper = styled.div<TestSuiteCardItemPropsType>`
 text-align: start;

@@ -1,6 +1,6 @@
 import React from "react";
 import { TestSuiteCardItemCountWrapper } from "./TestSuiteCardItemCount.styles";
-import { TestSuiteCardItemPropsType } from "../../../../../../types/types";
+import { TestSuiteCardItemPropsType } from "../../../../../types/types";
 
 const TestSuiteCardItemCount: React.FC<TestSuiteCardItemPropsType> = (props) => {
 

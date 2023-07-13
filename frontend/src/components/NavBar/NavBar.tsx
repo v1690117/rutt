@@ -20,9 +20,12 @@ function NavBar() {
     ]
 
     const location = useLocation()
+    console.log(location.pathname.includes(fieldValues[2].to))
     const renderNavBarItems = (isActive: boolean) => {
         return fieldValues
-            .filter(isActive ? value => value.to === location.pathname : value => value.to !== location.pathname)
+            .filter(isActive
+                ? value => location.pathname.includes(value.to)
+                : value => !location.pathname.includes(value.to))
             .map(value => <NavBarItem
                 key={value.title}
                 title={value.title}

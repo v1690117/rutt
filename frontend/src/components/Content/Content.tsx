@@ -5,13 +5,10 @@ import TestSuiteCreationForm from "./TestSuites/TestSuiteCreationForm/TestSuiteC
 import { ContentItemStateType } from "../../types/types";
 import SuitesService from "../../services/SuitesService";
 import Suite from "../../interfaces/suite";
-import TestSuiteCard from "./TestSuites/TestSuiteCreationForm/TestSuiteCard/TestSuiteCard";
+import { Route, Routes, useLocation, useParams } from "react-router-dom";
+import TestSuites from "./TestSuites/TestSuites";
 
-type ContentPropsType = {
-    type: 'main' | 'requirements' | 'cases' | 'tests'
-}
-
-const Content: React.FC<ContentPropsType> = (props) => {
+const Content: React.FC = () => {
     const [activated, setActivated] = useState(false);
     const [suites, setSuites] = useState<Suite[]>([]);
     const suiteService = useRef<SuitesService>(new SuitesService());
@@ -31,28 +28,30 @@ const Content: React.FC<ContentPropsType> = (props) => {
         setActivated(isActivatedValue)
     }
 
+    // temp
+    const handleIdClick = (e: any) => {
+        console.log(e.target.textContent)
+    }
+    const location = useLocation()
+    let params = useParams();
+    useEffect(() => {
+        console.log(params)
+        console.log(location)
+    }, [])
+
     return <ContentWrapper>
-        {props.type === 'main' &&
-            <>
+        <Routes>
+            <Route path="/" element={<>
                 <ActionBar isActivated={isActivated} />
                 {activated && <TestSuiteCreationForm />}
-            </>
-        }
-        {props.type === 'requirements' &&
-            <div>REQUIEMENTS</div>
-        }
-        {props.type === 'cases' &&
-            <div>USE CASES</div>
-        }
-        {props.type === 'tests' &&
-            <div>
-                {suites.map(s => <TestSuiteCard
-                    {...s}
-                    count={tempSuitState.count}
-                    date={tempSuitState.date}
-                    key={s.id} />)}
-            </div>
-        }
+            </>} />
+            <Route path="/requirements" element={<div>REQUIEMENTS</div>} />
+            <Route path="/cases" element={<div>USE CASES</div>} />
+            <Route path="/tests/:id" element={<div>TEST ID</div>} />
+            <Route path="/tests" element={<TestSuites />} />          
+            <Route path="*" element={<div>404 NOT FOUND</div>} />
+        </Routes>
+
     </ContentWrapper>
 }
 
