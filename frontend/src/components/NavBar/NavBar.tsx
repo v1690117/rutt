@@ -20,7 +20,6 @@ function NavBar() {
     ]
 
     const location = useLocation()
-    console.log(location.pathname.includes(fieldValues[2].to))
     const renderNavBarItems = (isActive: boolean) => {
         return fieldValues
             .filter(isActive
