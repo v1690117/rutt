@@ -13,7 +13,7 @@ const NavBarItem: React.FC<NavBarItemPropsType> = (props) => {
     const currentSuite = useSuiteStore(state => state.currentSuite)
     const values = [currentSuite?.id, currentSuite?.title]
 
-    return <NavBarItemWrapper {...props} >
+    return <NavBarItemWrapper title={props.title} to={props.to} >
         <>
             {props.title}
             {props.isActive

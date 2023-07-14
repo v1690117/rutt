@@ -11,7 +11,7 @@ const Breadcrumb: React.FC<BreadcrumbPropsType> = (props) => {
 
     return <BreadcrumbWrapper {...props}>
         <BreadcrumbSeparator />
-        {props.values.map(value => <BreadcrumbItem value={value} />)}
+        {props.values.map(value => <BreadcrumbItem value={value} key={value}/>)}
     </BreadcrumbWrapper>
 }
 
