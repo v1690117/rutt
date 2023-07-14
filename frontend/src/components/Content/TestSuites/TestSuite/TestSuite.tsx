@@ -1,25 +1,26 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { TestSuiteWrapper } from "./TestSuite.styles";
 import SuitesService from "../../../../services/SuitesService";
-import Suite from "../../../../interfaces/suite";
 import { useParams } from "react-router-dom";
+import { useSuiteStore } from "../../../../stores/suiteStore";
 
 const TestSuite: React.FC = () => {
-    const [suite, setSuite] = useState<Suite | null>(null);
     const suiteService = useRef<SuitesService>(new SuitesService());
     const params = useParams();
+    const { currentSuite, setCurrentSuite, removeCurrentSuite } = useSuiteStore(state => state)
 
     useEffect(() => {
         params.id && suiteService.current
             .get(params.id.toString())
-            .then(setSuite)
-    }, [params]);
+            .then(setCurrentSuite)
+        return () => removeCurrentSuite()
+    }, [params.id, setCurrentSuite, removeCurrentSuite]);
 
     return <TestSuiteWrapper>
-        {suite && <div>
-            <div>{suite.id}</div>
-            <div>{suite.title}</div>
-            <div>{suite.description}</div>
+        {currentSuite && <div>
+            <div>{currentSuite.id}</div>
+            <div>{currentSuite.title}</div>
+            <div>{currentSuite.description}</div>
         </div>}
     </TestSuiteWrapper>
 }

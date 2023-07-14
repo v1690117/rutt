@@ -23,7 +23,7 @@ export const Basic: StoryObj<typeof NavBarItem> = {
             <GlobalStyle />
             <ThemeProvider theme={theme}>
                 <Container>
-                    <NavBarItem title='Requirements' to='/requirements' />
+                    <NavBarItem title='Requirements' to='/requirements' isActive={true} />
                     <Routes>
                         <Route path="/requirements" element={<div>Requirements</div>} />
                     </Routes>

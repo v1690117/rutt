@@ -28,7 +28,8 @@ function NavBar() {
             .map(value => <NavBarItem
                 key={value.title}
                 title={value.title}
-                to={value.to} />)
+                to={value.to}
+                isActive={isActive} />)
     }
 
     return <NavBarWrapper>

@@ -10,7 +10,6 @@ border-radius: 50%;
 position: absolute;
 left: 0;
 
-
 &:before,
 &:after {
     content: "";
