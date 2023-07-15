@@ -3,11 +3,15 @@ import { TestSuiteWrapper } from "./TestSuite.styles";
 import SuitesService from "../../../../services/SuitesService";
 import { useParams } from "react-router-dom";
 import { useSuiteStore } from "../../../../stores/suiteStore";
+import shallow from 'zustand/shallow';
 
 const TestSuite: React.FC = () => {
     const suiteService = useRef<SuitesService>(new SuitesService());
     const params = useParams();
-    const { currentSuite, setCurrentSuite, removeCurrentSuite } = useSuiteStore(state => state)
+    const { currentSuite,
+        setCurrentSuite,
+        removeCurrentSuite
+    } = useSuiteStore(state => (state), shallow);
 
     useEffect(() => {
         params.id && suiteService.current
