@@ -1,22 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import { CreationFormFieldWrapper } from "./CreationFormField.styles";
 import Input from "../../../../common/Input/Input";
 import Textarea from "../../../../common/Textarea/Textarea";
 
 type CreationFormFieldPropsType = {
-    type?: 'title' | 'description'
+    type?: 'title' | 'description', 
+    onChange: (e: any) => void, 
+    value: string
 }
 
 const CreationFormField: React.FC<CreationFormFieldPropsType> = (props) => {
-    const [value, setValue] = useState('')
-
-    const handleChange = (e: any) => {
-        setValue(e.target.value)
-    }
-
+    
     const formElement = props.type === 'title'
-        ? <Input value={value} onChange={handleChange} />
-        : <Textarea value={value} onChange={handleChange} />
+        ? <Input value={props.value} onChange={props.onChange} />
+        : <Textarea value={props.value} onChange={props.onChange} />
 
     return <CreationFormFieldWrapper >
         <label>{props.type}</label>

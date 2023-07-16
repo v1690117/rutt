@@ -5,8 +5,11 @@ export const MainToolbarWrapper = styled.div`
   height: 40px;
   padding: 0 30px 0 42px; 
   color: ${props => props.theme.colors.main};
+  background-color: ${props => props.theme.bgColors.second};
   border-bottom: 1px solid ${props => props.theme.colors.second};
   display: flex;
   justify-content: space-between;
-  align-items: center;     
+  align-items: center;   
+  position: sticky;
+  top: 0;  
 `;

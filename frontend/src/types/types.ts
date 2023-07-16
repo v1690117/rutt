@@ -1,14 +1,7 @@
 export type ButtonPropsType = {
     onClick: () => void
     title: string
-    type: 'positive' | 'negative' 
-}
-
-export type FlexPropsType = {
-    direction?: string, 
-    align?: string,
-    justify?: string,
-    margin?: string 
+    type: 'positive' | 'negative'
 }
 
 export type AvatarPropsType = {
@@ -16,12 +9,20 @@ export type AvatarPropsType = {
     user?: {
         name: string,
         lastName: string
-    } 
+    }
 }
 
 export type FormFieldPropsType = {
     onChange: (e: any) => void
-    value: string     
+    value: string
 }
 
-export type ContentItemStateType = {title: string, isActive: boolean}[]
+export type ContentItemStateType = {
+    title: string,
+    isActive: boolean
+}[]
+
+export type TestSuiteCardItemPropsType = {
+    value?: string | number,
+    onClick?: (e: any) => void
+}

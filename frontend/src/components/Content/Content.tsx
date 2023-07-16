@@ -1,24 +1,14 @@
-import React, {useEffect, useRef, useState} from "react";
-import {ContentWrapper} from "./Content.styles";
+import React, { useState } from "react";
+import { ContentWrapper } from "./Content.styles";
 import ActionBar from "./ActionBar/ActionBar";
 import TestSuiteCreationForm from "./TestSuites/TestSuiteCreationForm/TestSuiteCreationForm";
-import {ContentItemStateType} from "../../types/types";
-import SuitesService from "../../services/SuitesService";
-import Suite from "../../interfaces/suite";
+import { ContentItemStateType } from "../../types/types";
+import { Route, Routes } from "react-router-dom";
+import TestSuites from "./TestSuites/TestSuites";
+import TestSuite from "./TestSuites/TestSuite/TestSuite";
 
-type ContentPropsType = {
-    type: 'main' | 'requirements' | 'cases' | 'tests'
-}
-
-const Content: React.FC<ContentPropsType> = (props) => {
+const Content: React.FC = () => {
     const [activated, setActivated] = useState(false);
-    const [suites, setSuites] = useState<Suite[]>([]);
-    const suiteService = useRef<SuitesService>(new SuitesService());
-
-    // todo move to suites component
-    useEffect(() => {
-        suiteService.current.getAll().then(setSuites)
-    }, []);
 
     const isActivated = (state: ContentItemStateType) => {
         const isActivatedValue = state.some((element: { isActive: boolean }) => element.isActive === true)
@@ -26,23 +16,17 @@ const Content: React.FC<ContentPropsType> = (props) => {
     }
 
     return <ContentWrapper>
-        {props.type === 'main' &&
-            <>
-                <ActionBar isActivated={isActivated}/>
-                {activated && <TestSuiteCreationForm/>}
-            </>
-        }
-        {props.type === 'requirements' &&
-            <div>REQUIEMENTS</div>
-        }
-        {props.type === 'cases' &&
-            <div>USE CASES</div>
-        }
-        {props.type === 'tests' &&
-            <div>
-                {suites.map(s => <div><a href='#'>#{s.id}</a> {s.title} {s.description}</div>)}
-            </div>
-        }
+        <Routes>
+            <Route path="/" element={<>
+                <ActionBar isActivated={isActivated} />
+                {activated && <TestSuiteCreationForm />}
+            </>} />
+            <Route path="/requirements" element={<div>REQUIREMENTS</div>} />
+            <Route path="/cases" element={<div>USE CASES</div>} />
+            <Route path="/tests/:id" element={<TestSuite />} />
+            <Route path="/tests" element={<TestSuites />} />
+            <Route path="*" element={<div>404 NOT FOUND</div>} />
+        </Routes>
     </ContentWrapper>
 }
 
