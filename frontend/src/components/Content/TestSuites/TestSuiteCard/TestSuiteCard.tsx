@@ -1,11 +1,11 @@
 import React from "react";
 import { TestSuiteCardWrapper } from "./TestSuiteCard.styles";
-import TestSuiteCardItemEmpty from "./TestSuiteCardItems.tsx/TestSuiteCardItemEmpty";
-import TestSuiteCardItemTitle from "./TestSuiteCardItems.tsx/TestSuiteCardItemTitle";
-import TestSuiteCardItemId from "./TestSuiteCardItems.tsx/TestSuiteCardItemId";
-import TestSuiteCardItemDescription from "./TestSuiteCardItems.tsx/TestSuiteCardItemDescription";
-import TestSuiteCardItemCount from "./TestSuiteCardItems.tsx/TestSuiteCardItemCount";
-import TestSuiteCardItemDate from "./TestSuiteCardItems.tsx/TestSuiteCardItemDate";
+import TestSuiteCardItemEmpty from "./TestSuiteCardItems/TestSuiteCardItemEmpty";
+import TestSuiteCardItemTitle from "./TestSuiteCardItems/TestSuiteCardItemTitle";
+import TestSuiteCardItemId from "./TestSuiteCardItems/TestSuiteCardItemId";
+import TestSuiteCardItemDescription from "./TestSuiteCardItems/TestSuiteCardItemDescription";
+import TestSuiteCardItemCount from "./TestSuiteCardItems/TestSuiteCardItemCount";
+import TestSuiteCardItemDate from "./TestSuiteCardItems/TestSuiteCardItemDate";
 
 type TestSuiteCardPropsType = {
     id?: string | number,
