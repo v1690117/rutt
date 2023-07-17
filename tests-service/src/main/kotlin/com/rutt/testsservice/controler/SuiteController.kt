@@ -7,27 +7,27 @@ import java.util.*
 
 @RestController
 class SuiteController(private val suiteService: SuiteService) {
-    @GetMapping("/suites")
+    @GetMapping("/api/suites")
     fun findAll(): List<Suite> {
         return suiteService.findAll().toList()
     }
 
-    @GetMapping("/suites/{id}")
+    @GetMapping("/api/suites/{id}")
     fun get(@PathVariable(name = "id") id: Long): Suite {
         return suiteService.getById(id)
     }
 
-    @PostMapping("/suites")
+    @PostMapping("/api/suites")
     fun create(@RequestBody suite: Suite): Suite {
         return suiteService.create(suite)
     }
 
-    @PutMapping("/suites")
+    @PutMapping("/api/suites")
     fun update(@RequestBody suite: Suite): Suite {
         return suiteService.update(suite)
     }
 
-    @DeleteMapping("/suites/{id}")
+    @DeleteMapping("/api/suites/{id}")
     fun deleteCase(@PathVariable(name = "id") id: Long) {
         suiteService.delete(id)
     }
