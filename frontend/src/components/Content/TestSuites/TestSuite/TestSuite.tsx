@@ -20,7 +20,7 @@ const TestSuite: React.FC = () => {
         params.id && suiteService.current
             .get(params.id.toString())
             .then(setCurrentSuite)
-            .then(() => setIsLoading(false))
+            .finally(() => setIsLoading(false))
         return () => removeCurrentSuite()
     }, [params.id, setCurrentSuite, removeCurrentSuite]);
 
