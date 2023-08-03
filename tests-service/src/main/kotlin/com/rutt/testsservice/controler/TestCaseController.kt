@@ -6,27 +6,27 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 class TestCaseController(private val caseService: CaseService) {
-    @GetMapping("/cases")
+    @GetMapping("/api/cases")
     fun findAll(): List<Case> {
         return caseService.findAll().toList()
     }
 
-    @GetMapping("/cases/{id}")
+    @GetMapping("/api/cases/{id}")
     fun findById(@PathVariable(name = "id") caseId: Long): Case {
         return caseService.findById(caseId)
     }
 
-    @PostMapping("/cases")
+    @PostMapping("/api/cases")
     fun create(@RequestBody case: Case): Case {
         return caseService.create(case)
     }
 
-    @PutMapping("/cases")
+    @PutMapping("/api/cases")
     fun update(@RequestBody case: Case): Case {
         return caseService.update(case)
     }
 
-    @DeleteMapping("/cases/{id}/delete")
+    @DeleteMapping("/api/cases/{id}/delete")
     fun delete(@PathVariable(name = "id") caseId: Long) {
         caseService.delete(caseId)
     }

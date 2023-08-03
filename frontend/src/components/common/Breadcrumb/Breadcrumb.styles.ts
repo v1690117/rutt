@@ -1,9 +1,11 @@
 import styled from 'styled-components';
 
-export const NavBarWrapper = styled.div`
+export const BreadcrumbWrapper = styled.div`
+color: ${props => props.theme.colors.main};
 background-color: ${props => props.theme.bgColors.second};
 display: flex;
-padding: 0 14px;
 position: sticky;
 top: 40px;
+font-weight: 700;
+margin-right: auto;
 `;

@@ -25,5 +25,37 @@ But if project continues few years. All years are in rush. Customer needs more a
 * integration with GL, RM, JIRA
 
 ## Details
+
 ![](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/v1690117/rutt/master/docs/Modules.puml)    
-![](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/v1690117/rutt/master/docs/Sequence.puml)    
+![](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/v1690117/rutt/master/docs/Sequence.puml)
+
+## Start the project
+
+### Backend
+
+todo
+
+### Frontend
+
+1. Go to frontend folder
+2. Add file `.env.local`
+
+```
+proxy_enabled=true
+proxy_server=${
+  YOUR_BACKEND_SERVER_URL
+}
+proxy_username=${
+  YOUR_USERNAME
+}
+proxy_password=${
+  YOUR_PASSWORD
+}
+```
+
+3. Update dependencies and start the app
+
+```cmd
+yarn 
+yarn start
+```

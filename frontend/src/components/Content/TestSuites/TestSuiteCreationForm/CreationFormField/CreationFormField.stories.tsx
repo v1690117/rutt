@@ -24,8 +24,8 @@ export const Basic: StoryObj<typeof CreationFormField> = {
             <GlobalStyle />
             <ThemeProvider theme={theme}>
                 <Container>
-                    <CreationFormField type='title' />
-                    <CreationFormField type='description' />
+                    <CreationFormField type='title' onChange={() => console.log('Form field changed')} value=''/>
+                    <CreationFormField type='description' onChange={() => console.log('Form field canceled')} value=''/>
                 </Container>
             </ThemeProvider>
         </>,

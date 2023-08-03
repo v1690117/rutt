@@ -43,6 +43,4 @@ class SuiteController(private val suiteService: SuiteService) {
     fun deleteCase(@PathVariable(name = "id") id: Long) {
         suiteService.delete(id)
     }
-
-
 }
