@@ -9,7 +9,7 @@ spring:
     url: jdbc:postgresql://${params.postgres.host}:${params.postgres.port}/data
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
 
 params:
   postgres:
