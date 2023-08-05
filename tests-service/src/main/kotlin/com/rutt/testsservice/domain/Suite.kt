@@ -19,10 +19,14 @@ class Suite(
         inverseJoinColumns = [JoinColumn(name = "case_id", referencedColumnName = "case_id")],
     )
     @JsonIgnoreProperties("suites")
-    var cases: List<Case>? = null,
+    var cases: MutableList<Case> = arrayListOf(),
 
     @Id
     @Column(name = "suite_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null
-)
+) {
+    override fun toString(): String {
+        return "Suite(title=$title, description=$description, cases=$cases, id=$id)"
+    }
+}

@@ -16,11 +16,11 @@ class Case(
     @OneToMany(cascade = [CascadeType.ALL], orphanRemoval = true)
     @JoinColumn(name = "case_id")
     @OrderColumn(name = "index")
-    var steps: MutableList<Step> = ArrayList(),
+    var steps: MutableList<Step> = arrayListOf(),
 
     @ManyToMany(mappedBy = "cases")
     @JsonIgnoreProperties("cases")
-    var suites: List<Suite>? = mutableListOf(),
+    var suites: MutableList<Suite> = arrayListOf(),
 
     @Id
     @Column(name = "case_id")
