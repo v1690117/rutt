@@ -6,8 +6,7 @@ import com.rutt.testsservice.repository.CaseRepository
 import com.rutt.testsservice.repository.SuiteRepository
 import org.springframework.stereotype.Service
 import java.util.logging.Logger
-import kotlin.reflect.KMutableProperty
-import kotlin.reflect.full.declaredMemberProperties
+
 @Service
 class SuiteService(private val suiteRepository: SuiteRepository, private val caseRepository: CaseRepository) {
     val log: Logger = Logger.getLogger(this.javaClass.name)
@@ -46,7 +45,7 @@ class SuiteService(private val suiteRepository: SuiteRepository, private val cas
         return suiteRepository.save(suite)
     }
 
-    fun addExistingCasesToSuiteById(ids: List<Long>, suiteId: Long): Suite {
+    fun addExistingCases(suiteId: Long, ids: List<Long>): Suite {
         val cases = caseRepository.findAllById(ids).toList()
         return addNewCasesToSuite(cases, suiteId)
     }
