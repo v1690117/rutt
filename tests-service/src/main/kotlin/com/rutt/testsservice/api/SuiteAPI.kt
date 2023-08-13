@@ -2,10 +2,8 @@ package com.rutt.testsservice.api
 
 import com.rutt.testsservice.domain.Case
 import com.rutt.testsservice.domain.Suite
-import org.springframework.cloud.openfeign.FeignClient
 import org.springframework.web.bind.annotation.*
 
-@FeignClient(name = "suites", url = "http://localhost:8070")
 interface SuiteAPI {
     @GetMapping("/suites")
     fun findAll(): List<Suite>;
@@ -28,4 +26,3 @@ interface SuiteAPI {
     @DeleteMapping("/suites/{id}")
     fun deleteCase(@PathVariable(name = "id") id: Long)
 }
-

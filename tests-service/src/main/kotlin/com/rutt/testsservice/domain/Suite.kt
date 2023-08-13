@@ -10,7 +10,7 @@ class Suite(
     var title: String?,
 
     @Column
-    var description: String?,
+    var description: String? = null,
 
     @ManyToMany
     @JoinTable(
