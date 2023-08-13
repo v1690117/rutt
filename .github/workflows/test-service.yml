@@ -29,6 +29,6 @@ jobs:
         run: mvn --batch-mode verify
 
       - name: Publish JaCoCo report
-          uses: codecov/codecov-action@v2
-          with:
-            file: target/site/jacoco/jacoco.xml
+        uses: codecov/codecov-action@v2
+        with:
+          file: target/site/jacoco/jacoco.xml
