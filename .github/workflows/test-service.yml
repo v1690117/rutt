@@ -11,5 +11,6 @@ jobs:
         with:
           java-version: '17'
           distribution: 'adopt'
-      - name: Build with Maven
+      - name: Compile
+        working-directory: ./tests-service
         run: mvn --batch-mode compile
