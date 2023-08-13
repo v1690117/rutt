@@ -26,4 +26,9 @@ jobs:
           distribution: 'adopt'
       - name: Test
         working-directory: ./tests-service
-        run: mvn --batch-mode test
+        run: mvn --batch-mode verify
+
+      - name: Publish JaCoCo report
+          uses: codecov/codecov-action@v2
+          with:
+            file: target/site/jacoco/jacoco.xml
