@@ -31,4 +31,5 @@ jobs:
       - name: Publish JaCoCo report
         uses: codecov/codecov-action@v2
         with:
+          token: ${{ secrets.CODECOV_TOKEN }}
           file: target/site/jacoco/jacoco.xml
