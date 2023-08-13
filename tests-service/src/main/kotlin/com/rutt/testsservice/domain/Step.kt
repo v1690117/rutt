@@ -17,7 +17,7 @@ class Step(
      */
     @Column
     @JsonIgnore
-    var index: Int,
+    var index: Int = 0,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "case_id")
