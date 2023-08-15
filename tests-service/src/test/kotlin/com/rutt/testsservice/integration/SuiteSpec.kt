@@ -23,6 +23,7 @@ class SuiteSpec : IntegrationTest() {
         assertThat(suiteAPI.findAll().size).isEqualTo(suites.size + 1)
     }
 
+    @Test
     fun `can add existing case into suite`() {
         var suite = suiteAPI.create(Suite("First one", ""))
         suiteAPI.addNewCases(
@@ -56,8 +57,10 @@ class SuiteSpec : IntegrationTest() {
 
         suite = suiteAPI.get(suite.id!!)
         assertThat(suite.cases.size).isEqualTo(2)
-        anotherSuite = suiteAPI.get(suite.id!!)
+
+        anotherSuite = suiteAPI.get(anotherSuite.id!!)
         assertThat(anotherSuite.cases.size).isEqualTo(1)
+
         case = caseAPI.findById(case.id!!)
         assertThat(case.suites.size).isEqualTo(2)
     }

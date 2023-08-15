@@ -8,7 +8,11 @@ import org.springframework.stereotype.Service
 import java.util.logging.Logger
 
 @Service
-class SuiteService(private val suiteRepository: SuiteRepository, private val caseRepository: CaseRepository) {
+class SuiteService(
+    private val suiteRepository: SuiteRepository,
+    private val caseRepository: CaseRepository,
+    private val caseService: CaseService
+) {
     val log: Logger = Logger.getLogger(this.javaClass.name)
 
     fun findAll(): MutableIterable<Suite> {
@@ -39,16 +43,20 @@ class SuiteService(private val suiteRepository: SuiteRepository, private val cas
         return suiteRepository.save(suiteToUpdate)
     }
 
-    fun addNewCasesToSuite(cases: List<Case>, suiteId: Long): Suite {
+    fun addNewCasesToSuite(suiteId: Long, cases: List<Case>): Suite {
+        return addExistingCasesToSuite(suiteId, cases.map { c -> caseService.create(c) })
+    }
+
+    fun addExistingCases(suiteId: Long, ids: List<Long>): Suite {
+        return addExistingCasesToSuite(suiteId, caseRepository.findAllById(ids).toList())
+    }
+
+    fun addExistingCasesToSuite(suiteId: Long, cases: List<Case>): Suite {
         val suite = suiteRepository.findById(suiteId).orElseThrow()
         suite.cases.addAll(cases)
         return suiteRepository.save(suite)
     }
 
-    fun addExistingCases(suiteId: Long, ids: List<Long>): Suite {
-        val cases = caseRepository.findAllById(ids).toList()
-        return addNewCasesToSuite(cases, suiteId)
-    }
 
     fun delete(id: Long) {
         suiteRepository.deleteById(id)

@@ -1,6 +1,5 @@
 package com.rutt.testsservice.domain
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import jakarta.persistence.*
 
 
@@ -19,7 +18,6 @@ class Case(
     var steps: List<Step> = arrayListOf(),
 
     @ManyToMany(mappedBy = "cases")
-    @JsonIgnoreProperties("cases")
     var suites: List<Suite> = arrayListOf(),
 
     @Id

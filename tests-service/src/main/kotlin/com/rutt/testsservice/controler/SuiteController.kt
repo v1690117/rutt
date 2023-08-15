@@ -21,7 +21,7 @@ class SuiteController(private val suiteService: SuiteService) : SuiteAPI {
     }
 
     override fun addNewCases(suiteId: Long, cases: List<Case>): Suite {
-        return suiteService.addNewCasesToSuite(cases, suiteId)
+        return suiteService.addNewCasesToSuite(suiteId, cases)
     }
 
     override fun addExistingCases(suiteId: Long, caseIds: List<Long>): Suite {
