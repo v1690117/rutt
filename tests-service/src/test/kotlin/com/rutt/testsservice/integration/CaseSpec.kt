@@ -16,7 +16,7 @@ class CaseSpec : IntegrationTest() {
         val case = Case(
             "title",
             "description",
-            listOf(
+            mutableListOf(
                 Step("do smth", "do smth"),
                 Step("do smth else", "do smth else"),
             )

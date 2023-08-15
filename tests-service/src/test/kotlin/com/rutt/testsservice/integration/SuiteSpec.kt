@@ -1,5 +1,6 @@
 package com.rutt.testsservice.integration
 
+import com.rutt.testsservice.DataGeneratingService
 import com.rutt.testsservice.api.CaseAPI
 import com.rutt.testsservice.api.SuiteAPI
 import com.rutt.testsservice.domain.Case
@@ -16,34 +17,25 @@ class SuiteSpec : IntegrationTest() {
     @Autowired
     lateinit var caseAPI: CaseAPI
 
+    @Autowired
+    lateinit var dataService: DataGeneratingService
+
     @Test
     fun `after we call create there are more suites in the db`() {
         val suites = suiteAPI.findAll()
-        suiteAPI.create(Suite("First one"))
+        dataService.suite()
         assertThat(suiteAPI.findAll().size).isEqualTo(suites.size + 1)
     }
 
     @Test
     fun `can add existing case into suite`() {
-        var suite = suiteAPI.create(Suite("First one", ""))
-        suiteAPI.addNewCases(
-            suite.id!!,
-            listOf(
-                Case(
-                    "title",
-                    "description",
-                    listOf(
-                        Step("do smth", "do smth")
-                    )
-                )
-            )
-        )
+        var suite = dataService.suiteWithCases()
 
         var case = caseAPI.create(
             Case(
                 "title",
                 "description",
-                listOf(
+                mutableListOf(
                     Step("do smth", "do smth"),
                     Step("do smth else", "do smth else"),
                 )

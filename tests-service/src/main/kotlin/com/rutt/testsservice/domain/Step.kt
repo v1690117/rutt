@@ -16,7 +16,6 @@ class Step(
      * Used to persist position of this test step in case to DB
      */
     @Column
-    @JsonIgnore
     var index: Int = 0,
 
     @ManyToOne(fetch = FetchType.LAZY)

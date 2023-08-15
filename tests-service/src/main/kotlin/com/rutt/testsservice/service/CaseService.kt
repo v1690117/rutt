@@ -1,11 +1,13 @@
 package com.rutt.testsservice.service
 
 import com.rutt.testsservice.domain.Case
+import com.rutt.testsservice.domain.Step
 import com.rutt.testsservice.repository.CaseRepository
+import com.rutt.testsservice.repository.StepRepository
 import org.springframework.stereotype.Service
 
 @Service
-class CaseService(private val caseRepo: CaseRepository) {
+class CaseService(private val caseRepo: CaseRepository, private val stepRepo: StepRepository) {
     fun findById(id: Long): Case {
         return caseRepo.findById(id).orElseThrow { NoSuchElementException("No test case with id = $id found") }
     }
@@ -29,5 +31,19 @@ class CaseService(private val caseRepo: CaseRepository) {
 
     fun delete(caseId: Long) {
         caseRepo.deleteById(caseId)
+    }
+
+    fun getSteps(id: Long): List<Step> {
+        val findStepsByCaseId = stepRepo.findStepsByCaseId(id)
+        return findStepsByCaseId
+    }
+
+    fun addStep(id: Long, step: Step) {
+        val case = caseRepo.findById(id).get()
+        step.index = case.steps.size
+        val newStep = stepRepo.save(step)
+        newStep.case = case
+        case.steps.add(newStep)
+        caseRepo.save(case)
     }
 }

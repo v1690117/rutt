@@ -15,7 +15,7 @@ class Case(
     @OneToMany(cascade = [CascadeType.ALL], orphanRemoval = true)
     @JoinColumn(name = "case_id")
     @OrderColumn(name = "index")
-    var steps: List<Step> = arrayListOf(),
+    var steps: MutableList<Step> = arrayListOf(),
 
     @ManyToMany(mappedBy = "cases")
     var suites: List<Suite> = arrayListOf(),

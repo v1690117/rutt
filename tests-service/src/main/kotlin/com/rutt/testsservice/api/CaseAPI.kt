@@ -1,6 +1,7 @@
 package com.rutt.testsservice.api
 
 import com.rutt.testsservice.domain.Case
+import com.rutt.testsservice.domain.Step
 import org.springframework.web.bind.annotation.*
 
 interface CaseAPI {
@@ -18,4 +19,10 @@ interface CaseAPI {
 
     @DeleteMapping("/api/cases/{id}/delete")
     fun delete(@PathVariable(name = "id") caseId: Long)
+
+    @GetMapping("/api/cases/{id}/steps")
+    fun getSteps(@PathVariable(name = "id") caseId: Long): List<Step>
+
+    @PostMapping("/api/cases/{id}/steps")
+    fun addStep(@PathVariable id: Long, @RequestBody step: Step)
 }

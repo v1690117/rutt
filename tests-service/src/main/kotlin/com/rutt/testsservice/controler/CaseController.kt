@@ -2,6 +2,7 @@ package com.rutt.testsservice.controler
 
 import com.rutt.testsservice.api.CaseAPI
 import com.rutt.testsservice.domain.Case
+import com.rutt.testsservice.domain.Step
 import com.rutt.testsservice.service.CaseService
 import org.springframework.web.bind.annotation.RestController
 
@@ -25,5 +26,13 @@ class CaseController(private val caseService: CaseService) : CaseAPI {
 
     override fun delete(caseId: Long) {
         caseService.delete(caseId)
+    }
+
+    override fun getSteps(id: Long): List<Step> {
+        return caseService.getSteps(id)
+    }
+
+    override fun addStep(id: Long, step: Step) {
+        caseService.addStep(id, step)
     }
 }
