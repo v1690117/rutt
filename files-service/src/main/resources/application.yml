@@ -1,0 +1,4 @@
+server:
+  servlet:
+    context-path: /files/api
+  port: 8081

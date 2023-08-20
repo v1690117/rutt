@@ -1,0 +1,17 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/yourdbname
+
+cloud:
+  aws:
+    credentials:
+      accessKey: YOUR_MINIO_ACCESS_KEY
+      secretKey: YOUR_MINIO_SECRET_KEY
+    endpoint:
+      override: http://localhost:9000 # адрес вашего MinIO сервера
+    region:
+      static: us-east-1
+    stack:
+      auto: false
+
