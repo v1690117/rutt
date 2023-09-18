@@ -1,6 +1,4 @@
 server:
-  servlet:
-    context-path: /files/api
   port: 8081
 
 aws:
@@ -12,4 +10,4 @@ aws:
 spring:
   data:
     mongodb:
-      uri: mongodb://localhost:27017/yourdbname
+      uri: mongodb://mongo:password@localhost:27017/files

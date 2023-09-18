@@ -7,20 +7,18 @@ import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
 
 @RestController
-@RequestMapping("/files")
 class FileController(private val fileService: FileService) {
-
-    @PostMapping("/upload")
+    @PostMapping("/files")
     fun uploadFile(@RequestParam("file") file: MultipartFile): String {
         return fileService.uploadFile(file)
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/files/{id}")
     fun getFile(@PathVariable id: String): FileDocument {
         return fileService.getFileMetadata(id)
     }
 
-    @GetMapping("/{id}/content")
+    @GetMapping("/files/{id}/content")
     fun download(@PathVariable id: String): ResponseEntity<ByteArray> {
         val fileBytes = fileService.retrieveFile(id)
         return ResponseEntity.ok(fileBytes)

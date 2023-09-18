@@ -18,7 +18,7 @@ class FileService(
     fun uploadFile(file: MultipartFile): String {
         val uuid = UUID.randomUUID().toString()
         s3Client.putObject(
-            PutObjectRequest.builder().bucket("your-bucket-name").key(uuid).build(),
+            PutObjectRequest.builder().bucket("files").key(uuid).build(),
             RequestBody.fromInputStream(file.inputStream, file.size)
         )
         fileRepository.save(
@@ -36,7 +36,7 @@ class FileService(
 
     fun retrieveFile(id: String): ByteArray {
         val getObjectResponse = s3Client.getObject(
-            GetObjectRequest.builder().bucket("your-bucket-name").key(id).build()
+            GetObjectRequest.builder().bucket("files").key(id).build()
         )
         return getObjectResponse.readAllBytes()
     }
