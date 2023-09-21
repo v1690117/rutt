@@ -11,15 +11,6 @@ services:
       - ./.local/mongodb-data:/data/db
       - ./conf/mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
 
-  mongo-express:
-    image: mongo-express
-    env_file:
-      - ./.local/variables.env
-    ports:
-      - 8071:8081
-    depends_on:
-      - mongodb
-
   minio:
     image: bitnami/minio
     env_file:
@@ -29,7 +20,7 @@ services:
       - 9001:9001
     volumes:
       - ./.local/minio-data:/data
-
+      - ./.local/minio-init.sh:/docker-entrypoint-init.d/minio-init.sh
 
 #  identity-db:
 #    image: postgres:latest
@@ -44,7 +35,7 @@ services:
 #      - "5433:5432"
 #  tests-db:
 #    image: postgres:15.2
-#    restart: always
+#    restart: alw,ays
 #    volumes:
 #      - ./.local/tests-db/data:/var/lib/postgresql/data
 #    environment:

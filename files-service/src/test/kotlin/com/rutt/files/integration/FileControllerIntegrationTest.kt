@@ -22,14 +22,16 @@ class FileControllerIntegrationTest(@Autowired val mockMvc: MockMvc) {
             "text/plain",
             "sample content".byteInputStream()
         )
-
         val result = mockMvc.perform(multipart("/files").file(mockFile))
             .andExpect(status().isOk)
             .andReturn()
-
         val uploadedFileId = result.response.contentAsString
 
-        mockMvc.perform(get("/files/$uploadedFileId"))
+        mockMvc.perform(get("/files/$uploadedFileId/content"))
+            .andExpect(status().isOk)
+            .andExpect(content().string("sample content"))
+
+        mockMvc.perform(get("/files/$uploadedFileId/content"))
             .andExpect(status().isOk)
             .andExpect(content().string("sample content"))
     }

@@ -7,14 +7,16 @@ import software.amazon.awssdk.auth.credentials.AwsBasicCredentials
 import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider
 import software.amazon.awssdk.regions.Region
 import software.amazon.awssdk.services.s3.S3Client
-import software.amazon.awssdk.services.s3.model.Bucket
 import software.amazon.awssdk.services.s3.model.CreateBucketRequest
-import software.amazon.awssdk.services.s3.model.ListBucketsRequest
+import software.amazon.awssdk.services.s3.model.HeadBucketRequest
+import software.amazon.awssdk.services.s3.model.NoSuchBucketException
 import java.net.URI
 
 
 @Configuration
 class S3Config {
+    private val BUCKET_NAME = "files"
+
     @Value("\${aws.accessKeyId:minio}")
     private val accessKey: String? = null
 
@@ -31,20 +33,16 @@ class S3Config {
             .forcePathStyle(true)
             .credentialsProvider(StaticCredentialsProvider.create(AwsBasicCredentials.create(accessKey, secretKey)))
             .endpointOverride(URI.create(endpoint))
-//            .httpClientBuilder(NettyNioAsyncHttpClient.builder().maxConcurrency(5).maxPendingConnectionAcquires(50000).build())
             .build()
-
-        val listBucketsRequest = ListBucketsRequest.builder().build()
-        val listBucketsResponse = client!!.listBuckets(listBucketsRequest)
-        if (!listBucketsResponse.buckets().stream().anyMatch { b: Bucket -> b.name() == "files" }) {
-            // todo this does not work
-            client!!.createBucket(
-                CreateBucketRequest
-                    .builder()
-                    .bucket("files")
-                    .build()
-            )
-        }
+        ensureDefaultBucketExist(client, BUCKET_NAME)
         return client
+    }
+
+    private fun ensureDefaultBucketExist(client: S3Client, bucketName: String) {
+        try {
+            client.headBucket(HeadBucketRequest.builder().bucket(bucketName).build())
+        } catch (e: NoSuchBucketException) {
+            client.createBucket(CreateBucketRequest.builder().bucket(bucketName).build())
+        }
     }
 }
