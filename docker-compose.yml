@@ -33,17 +33,16 @@ services:
 #      POSTGRES_PASSWORD: "0"
 #    ports:
 #      - "5433:5432"
-#  tests-db:
-#    image: postgres:15.2
-#    restart: alw,ays
-#    volumes:
-#      - ./.local/tests-db/data:/var/lib/postgresql/data
-#    environment:
-#      POSTGRES_DB: "data"
-#      POSTGRES_USER: "postgres"
-#      POSTGRES_PASSWORD: "0"
-#    ports:
-#      - "5432:5432"
+  tests-db:
+    image: postgres:15.2
+    volumes:
+      - ./.local/tests-db/data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: "data"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "0"
+    ports:
+      - "5432:5432"
 #  tests-service:
 #    image: tests-service
 #    restart: always

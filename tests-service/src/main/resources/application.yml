@@ -1,6 +1,4 @@
 server:
-  servlet:
-    context-path: /tests/api
   port: 8080
 spring:
   datasource:
