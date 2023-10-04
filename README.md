@@ -33,7 +33,31 @@ But if project continues few years. All years are in rush. Customer needs more a
 
 ### Backend
 
-todo
+Requirements:
+
+- docker
+- docker compose
+
+Build backend images:
+
+```cmd
+chmod +x buildImages.sh
+./buildImages.sh
+```
+
+Run docker compose:
+
+```cmd
+docker-compose up -d
+```
+
+Check [files service](http://localhost:7081/actuator/health) and [tests service](http://localhost:7080/actuator/health)
+
+To stop services run
+
+```cmd
+docker-compose down
+```
 
 ### Frontend
 
