@@ -1,38 +1,6 @@
 version: '3.1'
 
 services:
-  mongodb:
-    image: mongo:latest
-    env_file:
-      - ./.local/variables.env
-    ports:
-      - 27017:27017
-    volumes:
-      - ./.local/mongodb-data:/data/db
-      - ./conf/mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
-
-  minio:
-    image: bitnami/minio
-    env_file:
-      - ./.local/variables.env
-    ports:
-      - 9000:9000
-      - 9001:9001
-    volumes:
-      - ./.local/minio-data:/data
-      - ./.local/minio-init.sh:/docker-entrypoint-init.d/minio-init.sh
-
-#  identity-db:
-#    image: postgres:latest
-#    restart: always
-#    volumes:
-#      - .personal/tests-db/data:/var/lib/postgresql/data
-#    environment:
-#      POSTGRES_DB: "data"
-#      POSTGRES_USER: "postgres"
-#      POSTGRES_PASSWORD: "0"
-#    ports:
-#      - "5433:5432"
   tests-db:
     image: postgres:15.2
     volumes:
@@ -43,16 +11,35 @@ services:
       POSTGRES_PASSWORD: "0"
     ports:
       - "5432:5432"
-#  tests-service:
-#    image: tests-service
-#    restart: always
-#    ports:
-#      - "7080:8080"
-#    command:
-#      - "java"
-#      - "-jar"
-#      - "-Dparams.postgres.host=tests-db"
-#      - "app.jar"
+  tests-service:
+    image: tests-service
+    restart: always
+    ports:
+      - "7080:8080"
+    command:
+      - "java"
+      - "-jar"
+      - "-Dparams.postgres.host=tests-db"
+      - "app.jar"
+  mongodb:
+    image: mongo:latest
+    env_file:
+      - ./.local/variables.env
+    ports:
+      - 27017:27017
+    volumes:
+      - ./.local/mongodb-data:/data/db
+      - ./conf/mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
+  minio:
+    image: bitnami/minio
+    env_file:
+      - ./.local/variables.env
+    ports:
+      - 9000:9000
+      - 9001:9001
+    volumes:
+      - ./.local/minio-data:/data
+      - ./.local/minio-init.sh:/docker-entrypoint-init.d/minio-init.sh
 #  neo4j:
 #    image: neo4j:latest
 #    restart: always
@@ -66,8 +53,14 @@ services:
 #    ports:
 #      - "7474:7474"
 #      - "7687:7687"
-#  adminer:
-#    image: adminer
+#  identity-db:
+#    image: postgres:latest
 #    restart: always
+#    volumes:
+#      - .personal/tests-db/data:/var/lib/postgresql/data
+#    environment:
+#      POSTGRES_DB: "data"
+#      POSTGRES_USER: "postgres"
+#      POSTGRES_PASSWORD: "0"
 #    ports:
-#      - "2080:8080"
+#      - "5433:5432"
