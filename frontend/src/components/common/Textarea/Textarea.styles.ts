@@ -16,3 +16,4 @@ export const TextareaWrapper = styled.textarea<FormFieldPropsType>`
     border: 2px solid ${props => props.theme.colors.main};
   }  
 `;
+
