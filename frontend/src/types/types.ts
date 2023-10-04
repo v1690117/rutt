@@ -4,6 +4,12 @@ export type ButtonPropsType = {
     type: 'positive' | 'negative'
 }
 
+export type ControlButtonPropsType = {
+    onClick: (e: any) => void
+    title: string
+    isActive: boolean
+}
+
 export type AvatarPropsType = {
     onClick?: () => void
     user?: {
