@@ -13,7 +13,6 @@ services:
       - "5432:5432"
   tests-service:
     image: tests-service
-    restart: always
     ports:
       - "7080:8080"
     command:
@@ -40,6 +39,16 @@ services:
     volumes:
       - ./.local/minio-data:/data
       - ./.local/minio-init.sh:/docker-entrypoint-init.d/minio-init.sh
+  files-service:
+    image: files-service
+    ports:
+      - "7081:8081"
+    command:
+      - "java"
+      - "-jar"
+      - "-Dparams.mongo.host=mongodb"
+      - "-Dparams.s3.host=minio"
+      - "app.jar"
 #  neo4j:
 #    image: neo4j:latest
 #    restart: always

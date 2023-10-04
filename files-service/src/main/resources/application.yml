@@ -2,12 +2,26 @@ server:
   port: 8081
 
 aws:
-  accessKeyId: minio
-  secretKey: password
+  accessKeyId: ${params.s3.user}
+  secretKey: ${params.s3.password}
   s3:
-    endpoint: http://localhost:9000
-
+    endpoint: ${params.s3.scheme}://${params.s3.host}:${params.s3.port}
 spring:
   data:
     mongodb:
-      uri: mongodb://mongo:password@localhost:27017/files
+      uri: ${params.mongo.scheme}://${params.mongo.user}:${params.mongo.password}@${params.mongo.host}:${params.mongo.port}/${params.mongo.db}
+
+params:
+  s3:
+    scheme: http
+    host: localhost
+    port: 9000
+    user: minio
+    password: password
+  mongo:
+    scheme: mongodb
+    host: localhost
+    port: 27017
+    user: mongo
+    password: password
+    db: files
