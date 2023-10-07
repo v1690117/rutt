@@ -1,6 +1,12 @@
 version: '3.1'
 
 services:
+  api-gateway:
+    image: devopsfaith/krakend
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./.local/krakend/:/etc/krakend/
   tests-db:
     image: postgres:15.2
     volumes:
@@ -13,11 +19,14 @@ services:
       - "5432:5432"
   tests-service:
     image: tests-service
-    ports:
-      - "7080:8080"
+    #    ports:
+    #      - "7080:8080"
+    expose:
+      - 7080
     command:
       - "java"
       - "-jar"
+      - "-Dserver.port=7080"
       - "-Dparams.postgres.host=tests-db"
       - "app.jar"
   mongodb:
