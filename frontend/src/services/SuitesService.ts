@@ -1,7 +1,7 @@
 import Suite from "../interfaces/suite";
 
 export default class SuitesService {
-    private static url = "/api/suites";
+    private static url = "api/tsc/suites";
 
     get(id: string): Promise<Suite> {
         return fetch(`${SuitesService.url}/${id}`).then(r => r.json());
