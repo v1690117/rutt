@@ -6,7 +6,6 @@ import MarkdownPreview from './MarkdownPreview/MarkdownPreview';
 import { FormFieldPropsType } from '../../types/types';
 
 const MarkdownEditor: React.FC<FormFieldPropsType> = (props) => {
-    // const [value, setValue] = useState('')
     const [active, setActive] = useState<{ [k: string]: boolean }>({
         write: true,
         preview: false
@@ -21,14 +20,11 @@ const MarkdownEditor: React.FC<FormFieldPropsType> = (props) => {
         }
     }
 
-    // const handleChange = (e: { currentTarget: { value: React.SetStateAction<string> } }) => {
-    //     setValue(e.currentTarget.value)
-    // }
-
     return <MarkdownEditorWrapper>
         <MarkdownEditorControl onClick={handleClick} active={active} />
         {active.write && <MarkdownInput value={props.value} onChange={props.onChange} />}
         {active.preview && <MarkdownPreview value={props.value} />}
+
     </MarkdownEditorWrapper>
 }
 

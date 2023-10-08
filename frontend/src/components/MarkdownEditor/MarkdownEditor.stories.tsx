@@ -22,13 +22,12 @@ export default {
 } as ComponentMeta<typeof MarkdownEditor>;
 
 export const Basic: StoryObj<typeof MarkdownEditor> = {
-      
     render: () =>
         <BrowserRouter>
             <GlobalStyle />
             <ThemeProvider theme={theme}>
                 <Container>
-                    <MarkdownEditor value='# markdownEditor' onChange={() => console.log('field changed')}/>
+                    <MarkdownEditor value='# markdownEditor' onChange={() => console.log('field changed')} />
                 </Container>
             </ThemeProvider>
         </BrowserRouter>,
