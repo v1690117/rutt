@@ -4,6 +4,7 @@ export const MarkdownEditorWrapper = styled.div`
 border: 1px solid ${props => props.theme.colors.main};
 color: ${props => props.theme.colors.main};
 text-align: start;
+font-weight: 400;
 border-radius: 8px;
 width: 480px;
 min-height: 256px;

@@ -44,7 +44,8 @@ function TestSuiteCreationForm() {
             value={formFieldValues.title} />
         <CreationFormField type='description'
             onChange={handleDescriptionFormFieldChange}
-            value={formFieldValues.description} />
+            value={formFieldValues.description}
+        />
         <FormControl {...{ handleFormSubmit, handleFormCancel }} />
     </TestSuiteCreationFormWrapper>
 }
