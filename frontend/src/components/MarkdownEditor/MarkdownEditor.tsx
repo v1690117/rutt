@@ -33,20 +33,37 @@ const MarkdownEditor: React.FC<FormFieldPropsType> = (props) => {
         setDrag(true)
     }
 
-    const getFileMarkdown = (link: string) => {
-        return `![](${link})`
+    const getFileMarkdown = async (formData: any) => {
+        const response = await filesService.current.upload(formData)
+        const fileLink = await filesService.current.getContent(response)
+        return `![](${fileLink})`
     }
 
     const handleDropFile = async (formData: any) => {
-        const response = await filesService.current.upload(formData)
-        const fileLink = await filesService.current.getContent(response)
-        setCurrentFile(getFileMarkdown(fileLink))
+        const fileLink = await getFileMarkdown(formData)
+        setCurrentFile(fileLink)
         setDrag(false)
     }
 
+    const handlePaste = async (e: React.ClipboardEvent<HTMLTextAreaElement>) => {
+        const item = (e.clipboardData || (e as any).originalEvent.clipboardData).items[0];
+        if (item.type.indexOf('image') !== -1) {
+            const file = item.getAsFile();
+            if (file) {
+                const formData = new FormData()
+                formData.append('file', file)
+                const fileLink = await getFileMarkdown(formData)
+                setCurrentFile(fileLink)
+            }
+        }
+    };
+
     return <MarkdownEditorWrapper onDragEnter={dragEnterHandle}>
         <MarkdownEditorControl onClick={handleClick} active={active} />
-        {active.write && <MarkdownInput value={props.value} onChange={props.onChange} />}
+        {active.write && <MarkdownInput
+            value={props.value}
+            onChange={props.onChange}
+            onPaste={handlePaste} />}
         {active.preview && <MarkdownPreview value={props.value} />}
         {drag && <DragFile dropFileHandle={handleDropFile} drag={drag} />}
     </MarkdownEditorWrapper>
