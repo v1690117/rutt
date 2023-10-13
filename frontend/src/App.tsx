@@ -16,7 +16,7 @@ function App() {
                 <ThemeProvider theme={theme}>
                     <MainToolbar />
                     <NavBar />
-                    <Content />
+                    <Content />                                     
                 </ThemeProvider>
             </BrowserRouter>
         </>

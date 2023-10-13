@@ -1,56 +1,57 @@
 version: '3.1'
 
 services:
-  tests-db:
-    image: postgres:15.2
-    volumes:
-      - D://Projects/RUTT/rutt/.local/tests-db/data:/var/lib/postgresql/data
-      # - ./.local/tests-db/data:/var/lib/postgresql/data
-    environment:
-      POSTGRES_DB: "data"
-      POSTGRES_USER: "postgres"
-      POSTGRES_PASSWORD: "0"
-    ports:
-      - "5432:5432"
-  tests-service:
-    image: tests-service
-    ports:
-      - "7080:8080"
-    command:
-      - "java"
-      - "-jar"
-      - "-Dparams.postgres.host=tests-db"
-      - "app.jar"
-
-  # mongodb:
-  #   image: mongo:latest
-  #   env_file:
-  #     - D://Projects/RUTT/rutt/.local/variables.env
-  #   ports:
-  #     - 27017:27017
+  # tests-db:
+  #   image: postgres:15.2
   #   volumes:
-  #     - D://Projects/RUTT/rutt/.local/mongodb-data:/data/db
-  #     - .D://Projects/RUTT/rutt/conf/mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
-  # minio:
-  #   image: bitnami/minio
-  #   env_file:
-  #     - D://Projects/RUTT/rutt/.local/variables.env
+  #     - D://Projects/RUTT/rutt/.local/tests-db/data:/var/lib/postgresql/data
+  #     # - ./.local/tests-db/data:/var/lib/postgresql/data
+  #   environment:
+  #     POSTGRES_DB: "data"
+  #     POSTGRES_USER: "postgres"
+  #     POSTGRES_PASSWORD: "0"
   #   ports:
-  #     - 9000:9000
-  #     - 9001:9001
-  #   volumes:
-  #     - D://Projects/RUTT/rutt/.local/minio-data:/data
-  #     - D://Projects/RUTT/rutt/.local/minio-init.sh:/docker-entrypoint-init.d/minio-init.sh
-  # files-service:
-  #   image: files-service
+  #     - "5432:5432"
+  # tests-service:
+  #   image: tests-service
   #   ports:
-  #     - "7081:8081"
+  #     - "7080:8080"
   #   command:
   #     - "java"
   #     - "-jar"
-  #     - "-Dparams.mongo.host=mongodb"
-  #     - "-Dparams.s3.host=minio"
+  #     - "-Dparams.postgres.host=tests-db"
   #     - "app.jar"
+
+  mongodb:
+    image: mongo:latest
+    env_file:
+      - D://Projects/RUTT/rutt/.local/variables.env
+    ports:
+      - 27017:27017
+    volumes:
+      - D://Projects/RUTT/rutt/.local/mongodb-data:/data/db
+      - D://Projects/RUTT/rutt/conf/mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
+  minio:
+    image: bitnami/minio
+    env_file:
+      - D://Projects/RUTT/rutt/.local/variables.env
+    ports:
+      - 9000:9000
+      - 9001:9001
+    volumes:
+      - D://Projects/RUTT/rutt/.local/minio-data:/data
+      - D://Projects/RUTT/rutt/.local/minio-init.sh:/docker-entrypoint-init.d/minio-init.sh
+  files-service:
+    image: files-service
+    ports:
+      - "7081:8081"
+    command:
+      - "java"
+      - "-jar"
+      - "-Dparams.mongo.host=mongodb"
+      - "-Dparams.s3.host=minio"
+      - "-Dspring.data.mongodb.uri=mongodb://mongo:password@mongodb:27017/files"
+      - "app.jar"
 
 #  neo4j:
 #    image: neo4j:latest

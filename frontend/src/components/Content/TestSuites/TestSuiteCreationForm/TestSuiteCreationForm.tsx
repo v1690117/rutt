@@ -1,14 +1,27 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { TestSuiteCreationFormWrapper } from "./TestSuiteCreationForm.styles";
 import CreationFormField from "./CreationFormField/CreationFormField";
 import FormControl from "./FormControl/FormControl";
 import SuitesService from "../../../../services/SuitesService";
+import { useFileStore } from "../../../../stores/fileStore";
 
 function TestSuiteCreationForm() {
     const [formFieldValues, setFormFieldValues] = useState({ title: '', description: '' })
     const [error, setError] = useState(null)
-
     const suiteService = useRef<SuitesService>(new SuitesService());
+
+    const { currentFile,
+        removeCurrentFile
+    } = useFileStore(state => state);
+
+    useEffect(() => {
+        if (currentFile) {
+            setFormFieldValues((prev) => ({
+                ...prev, description: prev.description + `\n${currentFile}`
+            }))
+        }
+        return () => removeCurrentFile()
+    }, [currentFile, removeCurrentFile])
 
     const clearFormFields = () => {
         setFormFieldValues({ title: '', description: '' })

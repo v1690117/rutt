@@ -10,4 +10,5 @@ position: relative;
 margin-right: auto;
 margin-bottom: 16px;
 padding: 0 28px;
+cursor: pointer;
 `;
