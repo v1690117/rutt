@@ -1,12 +1,12 @@
-import React, { useRef, useState } from 'react';
-import { MarkdownEditorWrapper } from './MarkdownEditor.styles';
+import React, {useRef, useState} from 'react';
+import {MarkdownEditorWrapper} from './MarkdownEditor.styles';
 import MarkdownEditorControl from './MarkdownEditorControl/MarkdownEditorControl';
 import MarkdownInput from './MarkdownInput/MarkdownInput';
 import MarkdownPreview from './MarkdownPreview/MarkdownPreview';
-import { FormFieldPropsType } from '../../types/types';
+import {FormFieldPropsType} from '../../types/types';
 import DragFile from './DragFile/DragFile';
 import FilesService from '../../services/FiilesService';
-import { useFileStore } from '../../stores/fileStore';
+import {useFileStore} from '../../stores/fileStore';
 
 const MarkdownEditor: React.FC<FormFieldPropsType> = (props) => {
     const [drag, setDrag] = useState(false)
@@ -34,8 +34,8 @@ const MarkdownEditor: React.FC<FormFieldPropsType> = (props) => {
     }
 
     const getFileMarkdown = async (formData: any) => {
-        const response = await filesService.current.upload(formData)
-        const fileLink = await filesService.current.getContent(response)
+        const id = await filesService.current.upload(formData)
+        const fileLink = await filesService.current.getContentUrl(id)
         return `![](${fileLink})`
     }
 
