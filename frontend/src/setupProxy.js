@@ -18,5 +18,18 @@ module.exports = function (app) {
                 }
             })
         );
+        app.use(
+            '/files',
+            createProxyMiddleware({
+                target: server,
+                changeOrigin: true,
+                rejectUnauthorized: false,
+                onProxyReq: (proxyReq, req, res) => {
+                    proxyReq.setHeader('Authorization', `Basic ${btoa(`${username}:${password}`)}`);
+                }
+            })
+        );
     }
 };
+
+

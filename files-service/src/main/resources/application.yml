@@ -10,6 +10,7 @@ spring:
   data:
     mongodb:
       uri: ${params.mongo.scheme}://${params.mongo.user}:${params.mongo.password}@${params.mongo.host}:${params.mongo.port}/${params.mongo.db}
+      # mongodb://mongo:password@mongodb:27017/files
 
 params:
   s3:

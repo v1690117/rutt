@@ -9,7 +9,7 @@ margin: auto 0;
 border-radius: 50%;
 position: absolute;
 left: 0;
-
+pointer-events: none;
 &:before,
 &:after {
     content: "";

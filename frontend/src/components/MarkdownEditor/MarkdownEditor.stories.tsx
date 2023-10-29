@@ -1,6 +1,6 @@
 import React from 'react';
 import { ComponentMeta, StoryObj } from '@storybook/react';
-import MainToolbar from "./MainToolbar";
+import MarkdownEditor from "./MarkdownEditor";
 import styled, { ThemeProvider } from "styled-components";
 import { theme } from '../../themes/themes';
 import GlobalStyle from '../common/GlobalStyle/GlobalStyle';
@@ -16,18 +16,18 @@ const Container = styled.div`
 `
 
 export default {
-    title: 'Components/MainToolbar',
-    component: MainToolbar,
+    title: 'Components/MarkdownEditor',
+    component: MarkdownEditor,
     argTypes: {},
-} as ComponentMeta<typeof MainToolbar>;
+} as ComponentMeta<typeof MarkdownEditor>;
 
-export const Basic: StoryObj<typeof MainToolbar> = {
+export const Basic: StoryObj<typeof MarkdownEditor> = {
     render: () =>
         <BrowserRouter>
             <GlobalStyle />
             <ThemeProvider theme={theme}>
                 <Container>
-                    <MainToolbar />
+                    <MarkdownEditor value='# markdownEditor' onChange={() => console.log('field changed')} />
                 </Container>
             </ThemeProvider>
         </BrowserRouter>,

@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 export const CreationFormFieldWrapper = styled.div`
-    color: ${props => props.theme.colors.main};
+   
+color: ${props => props.theme.colors.main};
     display: flex;
     align-items: center;
     justify-content: flex-end;
